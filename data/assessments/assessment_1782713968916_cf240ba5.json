@@ -1,0 +1,1347 @@
+{
+  "id": "assessment_1782713968916_cf240ba5",
+  "title": "Grade 6 LAT Baseline Assessment",
+  "grade": "6",
+  "assessmentGrade": "5",
+  "durationMinutes": 120,
+  "totalQuestions": 51,
+  "status": "draft",
+  "subjectCounts": {
+    "Hindi": 9,
+    "English": 9,
+    "Math": 10,
+    "Science": 8,
+    "SST": 8,
+    "Sanskrit": 7
+  },
+  "difficultyCounts": {
+    "basic": 9,
+    "proficient": 18,
+    "advanced": 16,
+    "moderate": null,
+    "intermediate": null
+  },
+  "questions": [
+    {
+      "id": 1,
+      "subject": "Hindi",
+      "competency": "Reading Comprehension",
+      "lo": "अनुच्छेद पढ़कर मुख्य भाव समझना",
+      "question": "एक छोटा लड़का रवि बाज़ार गया। उसने देखा कि लोग फल ख़रीद रहे हैं। रवि ने एक किलो सेब लिए और घर लौट आया। रवि के बाज़ार जाने के निर्णय से उसके किस उद्देश्य का पता चलता है?",
+      "options": [
+        "A) मनोरंजन के लिए बाज़ार की चहल-पहल देखना",
+        "B) किसी विशेष वस्तु की आवश्यकता पूरी करना",
+        "C) दोस्तों के साथ समय बिताना",
+        "D) केवल बाज़ार की सैर करना"
+      ],
+      "answer": "B",
+      "difficulty": "basic",
+      "status": "pending",
+      "marks": 1,
+      "validation": {
+        "valid": true,
+        "score": 3,
+        "issues": [],
+        "fix": null
+      }
+    },
+    {
+      "id": 2,
+      "subject": "Hindi",
+      "competency": "Reading Comprehension",
+      "lo": "घटनाओं के क्रम का तर्क समझना",
+      "question": "गीता ने सुबह उठकर ब्रश किया, फिर नाश्ता किया और स्कूल बस में चढ़ गई। यदि गीता नाश्ता करने से पहले स्कूल बस में चढ़ जाती, तो उसे क्या समस्या हो सकती थी?",
+      "options": [
+        "A) उसे स्कूल में देर हो जाती",
+        "B) वह भूखी रह जाती",
+        "C) उसके दांत साफ़ नहीं होते",
+        "D) उसे अपनी किताबें नहीं मिलतीं"
+      ],
+      "answer": "B",
+      "difficulty": "moderate",
+      "status": "approved",
+      "marks": 1,
+      "validation": {
+        "valid": true,
+        "score": 4,
+        "issues": [],
+        "fix": null
+      }
+    },
+    {
+      "id": 3,
+      "subject": "Hindi",
+      "competency": "Reading Comprehension",
+      "lo": "निष्कर्ष निकालना",
+      "question": "पेड़ पर बहुत सारे पंछी चहचहा रहे थे। अचानक तेज़ हवा चलने लगी और पंछी घोंसलों में छिप गए। पंछियों ने घोंसलों में छिपना क्यों उचित समझा?",
+      "options": [
+        "A) उन्हें भूख लगी थी",
+        "B) वे सो रहे थे",
+        "C) मौसम ख़राब होने के डर से",
+        "D) उन्हें खेलना था"
+      ],
+      "answer": "C",
+      "difficulty": "proficient",
+      "status": "pending",
+      "marks": 1,
+      "validation": {
+        "valid": true,
+        "score": 9,
+        "issues": [],
+        "fix": null
+      }
+    },
+    {
+      "id": 4,
+      "subject": "Hindi",
+      "competency": "Reading Comprehension",
+      "lo": "पात्र के गुणों का विश्लेषण",
+      "question": "सुधा ने अपनी पुरानी किताबें अपने छोटे भाई को दे दीं। इससे सुधा के स्वभाव के बारे में क्या पता चलता है?",
+      "options": [
+        "A) वह बहुत स्वार्थी है",
+        "B) वह दूसरों की मदद करना पसंद करती है",
+        "C) उसे पढ़ाई पसंद नहीं है",
+        "D) वह बहुत कंजूस है"
+      ],
+      "answer": "B",
+      "difficulty": "proficient",
+      "status": "pending",
+      "marks": 1,
+      "validation": {
+        "valid": true,
+        "score": 10,
+        "issues": [],
+        "fix": null
+      }
+    },
+    {
+      "id": 5,
+      "subject": "Hindi",
+      "competency": "Reading Comprehension",
+      "lo": "सूचना का विश्लेषण",
+      "question": "एक सूचना बोर्ड पर लिखा था: 'कल दोपहर 2 बजे के बाद पानी की सप्लाई बंद रहेगी।' अगर किसी को पानी चाहिए, तो उसे क्या करना चाहिए?",
+      "options": [
+        "A) पानी का इंतज़ार करना चाहिए",
+        "B) कल 2 बजे से पहले पानी भर लेना चाहिए",
+        "C) अगले दिन पानी का उपयोग नहीं करना चाहिए",
+        "D) नल खोलकर छोड़ देना चाहिए"
+      ],
+      "answer": "B",
+      "difficulty": "proficient",
+      "status": "pending",
+      "marks": 1,
+      "validation": {
+        "valid": true,
+        "score": 10,
+        "issues": [],
+        "fix": null
+      }
+    },
+    {
+      "id": 6,
+      "subject": "Hindi",
+      "competency": "Reading Comprehension",
+      "lo": "उद्देश्य पहचानना",
+      "question": "कहानी के अंत में राजा ने अपनी गलती मान ली। लेखक ने यह क्यों लिखा होगा?",
+      "options": [
+        "A) यह बताने के लिए कि राजा डरपोक था",
+        "B) यह बताने के लिए कि अपनी गलती मानना साहस का काम है",
+        "C) राजा को सज़ा देने के लिए",
+        "D) कहानी को छोटा करने के लिए"
+      ],
+      "answer": "B",
+      "difficulty": "advanced",
+      "status": "pending",
+      "marks": 1,
+      "validation": {
+        "valid": true,
+        "score": 10,
+        "issues": [],
+        "fix": null
+      }
+    },
+    {
+      "id": 7,
+      "subject": "Hindi",
+      "competency": "Reading Comprehension",
+      "lo": "तुलना करना",
+      "question": "एक तरफ शहर का जीवन है जहाँ शोर है, दूसरी तरफ गाँव का जीवन है जहाँ शांति है। दोनों का वर्णन पढ़कर आप क्या कह सकते हैं?",
+      "options": [
+        "A) दोनों जगह शोर है",
+        "B) दोनों जगहों का वातावरण अलग-अलग है",
+        "C) गाँव में रहना मुश्किल है",
+        "D) शहर का जीवन बहुत शांत है"
+      ],
+      "answer": "B",
+      "difficulty": "advanced",
+      "status": "pending",
+      "marks": 1,
+      "validation": {
+        "valid": true,
+        "score": 9,
+        "issues": [],
+        "fix": null
+      }
+    },
+    {
+      "id": 8,
+      "subject": "Hindi",
+      "competency": "Reading Comprehension",
+      "lo": "विषय-वस्तु की समझ",
+      "question": "प्रदूषण बढ़ने से पेड़-पौधे सूख रहे हैं। अगर हम और पेड़ लगाएँ तो क्या बदलाव आएगा?",
+      "options": [
+        "A) हवा और प्रदूषित होगी",
+        "B) पर्यावरण में सुधार होगा",
+        "C) तापमान और बढ़ेगा",
+        "D) कुछ नहीं बदलेगा"
+      ],
+      "answer": "B",
+      "difficulty": "proficient",
+      "status": "pending",
+      "marks": 1,
+      "validation": {
+        "valid": true,
+        "score": 9,
+        "issues": [],
+        "fix": null
+      }
+    },
+    {
+      "id": 9,
+      "subject": "Hindi",
+      "competency": "Reading Comprehension",
+      "lo": "मुख्य विचार पहचानना",
+      "question": "अमित ने अपने दोस्तों के साथ मिलकर पार्क की सफाई की। पार्क साफ हो गया और लोग वहाँ खेलने आने लगे। इस अनुच्छेद का सबसे उपयुक्त शीर्षक क्या हो सकता है?",
+      "options": [
+        "A) अमित और उसके दोस्त",
+        "B) पार्क की सफाई का महत्व",
+        "C) सफाई का काम",
+        "D) खेलने का मैदान"
+      ],
+      "answer": "B",
+      "difficulty": "advanced",
+      "status": "pending",
+      "marks": 1,
+      "validation": {
+        "valid": true,
+        "score": 9,
+        "issues": [],
+        "fix": null
+      }
+    },
+    {
+      "id": 1,
+      "subject": "English",
+      "competency": "Reading Comprehension",
+      "lo": "Infers meaning of simple stories",
+      "question": "Arjun went to the market in Jaipur to buy apples. He found the shopkeeper was away, so he waited patiently until the shopkeeper returned. What does this tell us about Arjun?",
+      "options": ["A) He was angry", "B) He was patient", "C) He was hungry", "D) He was lost"],
+      "answer": "B",
+      "difficulty": "basic",
+      "status": "pending",
+      "marks": 1,
+      "validation": {
+        "valid": true,
+        "score": 9,
+        "issues": [],
+        "fix": null
+      }
+    },
+    {
+      "id": 2,
+      "subject": "English",
+      "competency": "Reading Comprehension",
+      "lo": "Identifies main idea in a paragraph",
+      "question": "Priya loves gardening. Every morning, she waters her marigold plants, removes weeds, and checks for insects. The soil in her garden is very fertile. What is this paragraph mostly about?",
+      "options": [
+        "A) Buying marigold flowers",
+        "B) Dealing with garden insects",
+        "C) Caring for a garden",
+        "D) Selling soil to neighbors"
+      ],
+      "answer": "C",
+      "difficulty": "basic",
+      "status": "pending",
+      "marks": 1,
+      "validation": {
+        "valid": true,
+        "score": 9,
+        "issues": [],
+        "fix": null
+      }
+    },
+    {
+      "id": 3,
+      "subject": "English",
+      "competency": "Reading Comprehension",
+      "lo": "Predicts outcomes based on text",
+      "question": "The sky turned dark gray and the wind started blowing strongly while Ravi was playing cricket in the field. What is most likely to happen next?",
+      "options": [
+        "A) The sun will come out brighter",
+        "B) Ravi will score a century",
+        "C) It will start raining",
+        "D) The birds will stop singing"
+      ],
+      "answer": "C",
+      "difficulty": "proficient",
+      "status": "pending",
+      "marks": 1,
+      "validation": {
+        "valid": true,
+        "score": 9,
+        "issues": [],
+        "fix": null
+      }
+    },
+    {
+      "id": 4,
+      "subject": "English",
+      "competency": "Reading Comprehension",
+      "lo": "Analyzes character motivations",
+      "question": "Fatima helped her grandmother cross the busy street in Delhi. She held her hand firmly and walked slowly. Why did Fatima walk slowly?",
+      "options": [
+        "A) She was tired",
+        "B) She wanted to look at cars",
+        "C) She wanted to ensure her grandmother's safety",
+        "D) She was afraid of the street"
+      ],
+      "answer": "C",
+      "difficulty": "proficient",
+      "status": "pending",
+      "marks": 1,
+      "validation": {
+        "valid": true,
+        "score": 10,
+        "issues": [],
+        "fix": null
+      }
+    },
+    {
+      "id": 5,
+      "subject": "English",
+      "competency": "Reading Comprehension",
+      "lo": "Draws conclusions from narrative details",
+      "question": "Rahul worked on his science project all night. The next day, he presented his model clearly and won the first prize. How did Rahul likely feel after the result?",
+      "options": ["A) Bored", "B) Satisfied and proud", "C) Confused", "D) Sleepy but sad"],
+      "answer": "B",
+      "difficulty": "proficient",
+      "status": "pending",
+      "marks": 1,
+      "validation": {
+        "valid": true,
+        "score": 10,
+        "issues": [],
+        "fix": null
+      }
+    },
+    {
+      "id": 6,
+      "subject": "English",
+      "competency": "Reading Comprehension",
+      "lo": "Evaluates cause and effect in stories",
+      "question": "Because there was a severe water shortage in the village, the school decided to close the swimming pool and use water only for drinking. What was the direct cause of this action?",
+      "options": [
+        "A) The school was too expensive",
+        "B) Students did not like swimming",
+        "C) Lack of water supply",
+        "D) The pool was broken"
+      ],
+      "answer": "C",
+      "difficulty": "basic",
+      "status": "pending",
+      "marks": 1,
+      "validation": {
+        "valid": true,
+        "score": 9,
+        "issues": [],
+        "fix": null
+      }
+    },
+    {
+      "id": 7,
+      "subject": "English",
+      "competency": "Reading Comprehension",
+      "lo": "Interprets text nuances",
+      "question": "Meena read a letter from her cousin inviting her to a wedding in Mysore. She started packing her clothes immediately. What does her action suggest?",
+      "options": [
+        "A) She is planning a vacation",
+        "B) She is excited to attend the wedding",
+        "C) She is moving to Mysore",
+        "D) She is avoiding her homework"
+      ],
+      "answer": "B",
+      "difficulty": "advanced",
+      "status": "pending",
+      "marks": 1,
+      "validation": {
+        "valid": true,
+        "score": 10,
+        "issues": [],
+        "fix": null
+      }
+    },
+    {
+      "id": 8,
+      "subject": "English",
+      "competency": "Reading Comprehension",
+      "lo": "Synthesizes information",
+      "question": "After the heavy floods, the villagers lost their crops, but the government sent grain and medical aid to support them. What does this show about the village situation?",
+      "options": [
+        "A) They had a successful harvest",
+        "B) The villagers were self-sufficient",
+        "C) They were in need of external support",
+        "D) They refused government help"
+      ],
+      "answer": "C",
+      "difficulty": "advanced",
+      "status": "pending",
+      "marks": 1,
+      "validation": {
+        "valid": true,
+        "score": 10,
+        "issues": [],
+        "fix": null
+      }
+    },
+    {
+      "id": 9,
+      "subject": "English",
+      "competency": "Reading Comprehension",
+      "lo": "Identifies supporting evidence",
+      "question": "Vikram wanted to prove that exercise is healthy. Which statement best supports his argument?",
+      "options": [
+        "A) Exercise helps keep the body active and fit",
+        "B) Many people like to watch sports",
+        "C) Parks are often crowded in the evening",
+        "D) Shoes are important for running"
+      ],
+      "answer": "A",
+      "difficulty": "advanced",
+      "status": "pending",
+      "marks": 1,
+      "validation": {
+        "valid": true,
+        "score": 10,
+        "issues": [],
+        "fix": null
+      }
+    },
+    {
+      "id": 1,
+      "subject": "Math",
+      "competency": "Integer Operations",
+      "lo": "Understanding positive and negative numbers in real life",
+      "question": "The temperature in Shimla was 3 degrees Celsius above zero in the morning. By noon, it rose by 4 degrees Celsius, and by night, it dropped by 9 degrees Celsius. What is the final temperature in Shimla?",
+      "options": [
+        "A) 2 degrees Celsius",
+        "B) -2 degrees Celsius",
+        "C) 4 degrees Celsius",
+        "D) -4 degrees Celsius"
+      ],
+      "answer": "B",
+      "difficulty": "intermediate",
+      "status": "approved",
+      "marks": 2,
+      "validation": {
+        "valid": true,
+        "score": 4,
+        "issues": [],
+        "fix": null
+      }
+    },
+    {
+      "id": 2,
+      "subject": "Math",
+      "competency": "Integer Operations",
+      "lo": "Application of integers in financial transactions",
+      "question": "Arjun has a bank balance of ₹500. If he withdraws ₹600 for school books, how does this transaction impact his account status, and what is the resulting balance?",
+      "options": [
+        "A) The account has a surplus of ₹100",
+        "B) The account is overdrawn by ₹100",
+        "C) The account has a balance of ₹1100",
+        "D) The account is overdrawn by ₹1100"
+      ],
+      "answer": "B",
+      "difficulty": "basic",
+      "status": "pending",
+      "marks": 1,
+      "validation": {
+        "valid": true,
+        "score": 4,
+        "issues": [],
+        "fix": null
+      }
+    },
+    {
+      "id": 3,
+      "subject": "Math",
+      "competency": "Integer Operations",
+      "lo": "Comparing integers based on magnitude",
+      "question": "A submarine is performing depth tests at different locations. Its recorded depths relative to sea level are -125 meters, -210 meters, -185 meters, and -230 meters. Which of these locations is the deepest, and how much further below sea level is it compared to the shallowest location recorded?",
+      "options": [
+        "A) -230 meters; 105 meters deeper",
+        "B) -230 meters; 95 meters deeper",
+        "C) -125 meters; 105 meters deeper",
+        "D) -210 meters; 85 meters deeper"
+      ],
+      "answer": "A",
+      "difficulty": "intermediate",
+      "status": "approved",
+      "marks": 2,
+      "validation": {
+        "valid": true,
+        "score": 3,
+        "issues": [],
+        "fix": null
+      }
+    },
+    {
+      "id": 4,
+      "subject": "Math",
+      "competency": "Integer Operations",
+      "lo": "Addition of positive and negative integers",
+      "question": "A balloon is 20 meters above ground level. If it descends by 25 meters, what is its position relative to the ground?",
+      "options": [
+        "A) 5 meters above",
+        "B) 5 meters below",
+        "C) 45 meters above",
+        "D) 45 meters below"
+      ],
+      "answer": "B",
+      "difficulty": "proficient",
+      "status": "pending",
+      "marks": 1,
+      "validation": {
+        "valid": true,
+        "score": 8,
+        "issues": [],
+        "fix": null
+      }
+    },
+    {
+      "id": 5,
+      "subject": "Math",
+      "competency": "Integer Operations",
+      "lo": "Interpretation of integer change",
+      "question": "Ravi's score in a quiz changes by -5 points for every wrong answer. If he gets 4 questions wrong, what is his total score change?",
+      "options": ["A) -1 point", "B) 20 points", "C) -20 points", "D) 1 point"],
+      "answer": "C",
+      "difficulty": "proficient",
+      "status": "pending",
+      "marks": 1,
+      "validation": {
+        "valid": true,
+        "score": 9,
+        "issues": [],
+        "fix": null
+      }
+    },
+    {
+      "id": 6,
+      "subject": "Math",
+      "competency": "Integer Operations",
+      "lo": "Sequence and integer logic",
+      "question": "A scuba diver is exploring a reef at an elevation of -10 meters relative to sea level. The diver swims up 3 meters to observe some coral, then dives down 5 meters to follow a school of fish. What is the diver's final elevation?",
+      "options": ["A) -12 meters", "B) -8 meters", "C) -2 meters", "D) 8 meters"],
+      "answer": "A",
+      "difficulty": "proficient",
+      "status": "pending",
+      "marks": 1,
+      "validation": {
+        "valid": true,
+        "score": 3,
+        "issues": [],
+        "fix": null
+      }
+    },
+    {
+      "id": 7,
+      "subject": "Math",
+      "competency": "Integer Operations",
+      "lo": "Advanced integer application in direction",
+      "question": "A lift is on the 2nd floor above the ground. It goes down 5 floors. Where is the lift now?",
+      "options": [
+        "A) 3rd floor basement",
+        "B) 2nd floor basement",
+        "C) Ground floor",
+        "D) 1st floor"
+      ],
+      "answer": "A",
+      "difficulty": "advanced",
+      "status": "pending",
+      "marks": 1,
+      "validation": {
+        "valid": true,
+        "score": 9,
+        "issues": [],
+        "fix": null
+      }
+    },
+    {
+      "id": 8,
+      "subject": "Math",
+      "competency": "Integer Operations",
+      "lo": "Real-world debt and gain reasoning",
+      "question": "Fatima owed her friend ₹20. She then earned ₹50 for helping in the garden and gave ₹20 back to her friend. How much does she have now?",
+      "options": ["A) ₹10", "B) ₹30", "C) ₹50", "D) ₹70"],
+      "answer": "B",
+      "difficulty": "advanced",
+      "status": "pending",
+      "marks": 1,
+      "validation": {
+        "valid": true,
+        "score": 8,
+        "issues": [],
+        "fix": null
+      }
+    },
+    {
+      "id": 9,
+      "subject": "Math",
+      "competency": "Integer Operations",
+      "lo": "Analyzing integer intervals",
+      "question": "Between which two integers is the sum of -7 and 4 located?",
+      "options": ["A) -2 and -4", "B) -4 and -2", "C) 2 and 4", "D) -8 and -10"],
+      "answer": "B",
+      "difficulty": "advanced",
+      "status": "pending",
+      "marks": 1,
+      "validation": {
+        "valid": true,
+        "score": 8,
+        "issues": [],
+        "fix": null
+      }
+    },
+    {
+      "id": 10,
+      "subject": "Math",
+      "competency": "Integer Operations",
+      "lo": "Conceptual understanding of magnitude",
+      "question": "Which of the following expressions results in the largest value?",
+      "options": ["A) -5 + 2", "B) -5 - 2", "C) 5 - 2", "D) -5 + 8"],
+      "answer": "D",
+      "difficulty": "advanced",
+      "status": "pending",
+      "marks": 1,
+      "validation": {
+        "valid": true,
+        "score": 9,
+        "issues": [],
+        "fix": null
+      }
+    },
+    {
+      "id": 1,
+      "subject": "Science",
+      "competency": "Weather",
+      "lo": "Understanding factors affecting weather",
+      "question": "If wind increases the rate of evaporation, how would the drying time of wet clothes differ between a closed room with a high-speed fan and an open courtyard on a calm, cloudy day, and what does this imply about the conditions required for faster drying?",
+      "options": [
+        "A) Clothes dry faster in the room because wind speed is the only factor.",
+        "B) Clothes dry faster in the courtyard because solar heat is the only factor.",
+        "C) Drying depends on a combination of air movement and environmental conditions, making the fan's effect significant but potentially limited by humidity.",
+        "D) Both environments will result in identical drying times regardless of conditions."
+      ],
+      "answer": "C",
+      "difficulty": "intermediate",
+      "status": "pending",
+      "marks": 1,
+      "validation": {
+        "valid": true,
+        "score": 4,
+        "issues": [],
+        "fix": null
+      }
+    },
+    {
+      "id": 2,
+      "subject": "Science",
+      "competency": "Weather",
+      "lo": "Analyzing weather patterns",
+      "question": "In Delhi, the temperature often drops significantly during winter nights. How does this temperature change lead to the formation of dew on grass, and what phase change occurs during this process?",
+      "options": [
+        "A) A rise in temperature causes liquid water to evaporate into the atmosphere.",
+        "B) A drop in temperature causes water vapor to release heat and condense into liquid droplets.",
+        "C) A drop in temperature causes grass to freeze and release moisture from within.",
+        "D) A rise in temperature causes solid frost to turn into liquid dew."
+      ],
+      "answer": "B",
+      "difficulty": "intermediate",
+      "status": "pending",
+      "marks": 1,
+      "validation": {
+        "valid": true,
+        "score": 5,
+        "issues": [],
+        "fix": null
+      }
+    },
+    {
+      "id": 3,
+      "subject": "Science",
+      "competency": "Weather",
+      "lo": "Interpreting weather changes",
+      "question": "If the weather forecast predicts high humidity and low wind speed for Mumbai, how will people likely feel?",
+      "options": [
+        "A) Dry and comfortable",
+        "B) Cold and shivering",
+        "C) Sticky and sweaty",
+        "D) Energetic and cool"
+      ],
+      "answer": "C",
+      "difficulty": "proficient",
+      "status": "pending",
+      "marks": 1,
+      "validation": {
+        "valid": true,
+        "score": 9,
+        "issues": [],
+        "fix": null
+      }
+    },
+    {
+      "id": 4,
+      "subject": "Science",
+      "competency": "Weather",
+      "lo": "Application of weather concepts",
+      "question": "Arjun wants to accurately measure the total rainfall in his village over the past 24 hours. He places a container in an open field, but it is knocked over by the wind, and some water splashes out. To ensure he gets an accurate measurement and avoids experimental error in his future recordings, what specific features or setup should his instrument have?",
+      "options": [
+        "A) A wide, open bowl placed on a raised platform to capture maximum wind flow.",
+        "B) A narrow, cylindrical rain gauge with a funnel top placed on level ground away from obstructions.",
+        "C) A glass beaker placed directly under a tree to prevent evaporation from sunlight.",
+        "D) A metal bucket with a wide mouth placed near a wall to keep it steady."
+      ],
+      "answer": "B",
+      "difficulty": "basic",
+      "status": "pending",
+      "marks": 1,
+      "validation": {
+        "valid": true,
+        "score": 4,
+        "issues": [],
+        "fix": null
+      }
+    },
+    {
+      "id": 5,
+      "subject": "Science",
+      "competency": "Weather",
+      "lo": "Analyzing relationship between heat and evaporation",
+      "question": "During summer, a pond in a village starts drying up faster. Which weather condition most likely contributed to this change?",
+      "options": [
+        "A) Low temperature and high wind",
+        "B) High temperature and high sunlight",
+        "C) Low humidity and freezing temperatures",
+        "D) High air pressure and cloudiness"
+      ],
+      "answer": "B",
+      "difficulty": "proficient",
+      "status": "pending",
+      "marks": 1,
+      "validation": {
+        "valid": true,
+        "score": 8,
+        "issues": [],
+        "fix": null
+      }
+    },
+    {
+      "id": 6,
+      "subject": "Science",
+      "competency": "Weather",
+      "lo": "Reasoning about weather conditions",
+      "question": "Fatima notices dark clouds gathering in the sky. She observes that the air feels heavy and the temperature drops slightly. What should she expect to happen next?",
+      "options": ["A) A heatwave", "B) An earthquake", "C) Rainfall", "D) A snowstorm"],
+      "answer": "C",
+      "difficulty": "proficient",
+      "status": "pending",
+      "marks": 1,
+      "validation": {
+        "valid": true,
+        "score": 8,
+        "issues": [],
+        "fix": null
+      }
+    },
+    {
+      "id": 7,
+      "subject": "Science",
+      "competency": "Weather",
+      "lo": "Advanced interpretation of environmental factors",
+      "question": "Compare two days: Day A has clear skies and 30°C temperature. Day B has thick cloud cover and 30°C temperature. On which day will the ground likely cool faster at night and why?",
+      "options": [
+        "A) Day A, because clouds trap heat",
+        "B) Day B, because clouds reflect sunlight",
+        "C) Day A, because clear skies allow heat to escape",
+        "D) Both will cool at the same rate"
+      ],
+      "answer": "C",
+      "difficulty": "advanced",
+      "status": "pending",
+      "marks": 1,
+      "validation": {
+        "valid": true,
+        "score": 10,
+        "issues": [],
+        "fix": null
+      }
+    },
+    {
+      "id": 8,
+      "subject": "Science",
+      "competency": "Weather",
+      "lo": "Synthesizing weather data",
+      "question": "A weather report shows that the temperature in Srinagar dropped significantly overnight, but the wind speed remained zero. What is the most probable observation the next morning?",
+      "options": [
+        "A) Heavy storm clouds",
+        "B) Strong gusts of wind",
+        "C) Frost forming on surfaces",
+        "D) Thunder and lightning"
+      ],
+      "answer": "C",
+      "difficulty": "advanced",
+      "status": "pending",
+      "marks": 1,
+      "validation": {
+        "valid": true,
+        "score": 9,
+        "issues": [],
+        "fix": null
+      }
+    },
+    {
+      "id": 1,
+      "subject": "SST",
+      "competency": "Historical Changes",
+      "lo": "Understand the change in lifestyles over time",
+      "question": "Arjun finds a set of smooth, polished stone tools and a collection of handmade clay pots while surveying a site. Based on these artifacts, what adjustment should he make to his survival strategy if he were to live in that specific period compared to the Paleolithic era?",
+      "options": [
+        "A) He would need to focus on hunting and gathering rather than farming.",
+        "B) He would need to transition from a nomadic lifestyle to settling in one place to manage crops and livestock.",
+        "C) He would need to learn how to operate complex steam-powered machinery.",
+        "D) He would need to focus primarily on manufacturing electronic circuits and digital devices."
+      ],
+      "answer": "B",
+      "difficulty": "intermediate",
+      "status": "approved",
+      "marks": 1,
+      "validation": {
+        "valid": true,
+        "score": 4,
+        "issues": [],
+        "fix": null
+      }
+    },
+    {
+      "id": 2,
+      "subject": "SST",
+      "competency": "Historical Changes",
+      "lo": "Compare tools and life of early humans",
+      "question": "How did the shift from nomadic hunting-gathering to settled farming change the way early humans managed their resources?",
+      "options": [
+        "A) It forced them to abandon the use of stone tools entirely",
+        "B) It allowed them to store surplus food and develop specialized labor",
+        "C) It made them completely dependent on migratory animal patterns",
+        "D) It reduced the need for community cooperation and group planning"
+      ],
+      "answer": "B",
+      "difficulty": "moderate",
+      "status": "pending",
+      "marks": 1,
+      "validation": {
+        "valid": true,
+        "score": 5,
+        "issues": [],
+        "fix": null
+      }
+    },
+    {
+      "id": 3,
+      "subject": "SST",
+      "competency": "Historical Changes",
+      "lo": "Analyze evidence from archaeological findings",
+      "question": "Fatima finds a pottery shard in her field that matches styles from the Indus Valley Civilization. What can she conclude about the area?",
+      "options": [
+        "A) People in that area had trade links or local settlements in the past",
+        "B) It is a modern factory site",
+        "C) No one lived there before 100 years ago",
+        "D) The climate has never changed in that region"
+      ],
+      "answer": "A",
+      "difficulty": "proficient",
+      "status": "pending",
+      "marks": 1,
+      "validation": {
+        "valid": true,
+        "score": 9,
+        "issues": [],
+        "fix": null
+      }
+    },
+    {
+      "id": 4,
+      "subject": "SST",
+      "competency": "Historical Changes",
+      "lo": "Understand social shifts in ancient civilizations",
+      "question": "How did the presence of a river basin influence the socio-economic structure and development of early ancient civilizations?",
+      "options": [
+        "A) By forcing populations to live in isolation to avoid river-borne diseases",
+        "B) By facilitating trade networks and providing consistent water supply for agricultural intensification",
+        "C) By encouraging nomadic lifestyles to avoid sedentary social hierarchies",
+        "D) By preventing the development of centralized governance due to frequent flood displacement"
+      ],
+      "answer": "B",
+      "difficulty": "proficient",
+      "status": "pending",
+      "marks": 1,
+      "validation": {
+        "valid": true,
+        "score": 5,
+        "issues": [],
+        "fix": null
+      }
+    },
+    {
+      "id": 5,
+      "subject": "SST",
+      "competency": "Historical Changes",
+      "lo": "Analyze transition from hunting to gathering",
+      "question": "Ravi compares the tools of Palaeolithic hunters with Neolithic farmers. How did the design of these tools change to meet new needs?",
+      "options": [
+        "A) They became heavier and harder to hold",
+        "B) They became smaller and less useful",
+        "C) They were refined for digging and harvesting grain",
+        "D) They were no longer made of stone"
+      ],
+      "answer": "C",
+      "difficulty": "advanced",
+      "status": "pending",
+      "marks": 1,
+      "validation": {
+        "valid": true,
+        "score": 9,
+        "issues": [],
+        "fix": null
+      }
+    },
+    {
+      "id": 6,
+      "subject": "SST",
+      "competency": "Historical Changes",
+      "lo": "Examine historical evidence of ancient trade",
+      "question": "Historians found beads and seals from distant regions inside an ancient Indian city. What does this suggest about the people of that time?",
+      "options": [
+        "A) They lived in isolation",
+        "B) They were engaged in long-distance trade",
+        "C) They were only focused on agriculture",
+        "D) They had no interest in art or jewelry"
+      ],
+      "answer": "B",
+      "difficulty": "proficient",
+      "status": "pending",
+      "marks": 1,
+      "validation": {
+        "valid": true,
+        "score": 9,
+        "issues": [],
+        "fix": null
+      }
+    },
+    {
+      "id": 7,
+      "subject": "SST",
+      "competency": "Historical Changes",
+      "lo": "Understand the impact of domestication",
+      "question": "How did the shift from a hunter-gatherer lifestyle to the domestication of plants and animals fundamentally alter the economic stability and resource accumulation of early human societies?",
+      "options": [
+        "A) It created a surplus of food, allowing for sedentary life and population growth.",
+        "B) It increased the time spent searching for food daily, making life more difficult.",
+        "C) It made societies fully dependent on external trade rather than local production.",
+        "D) It reduced the need for organized social structures and labor specialization."
+      ],
+      "answer": "A",
+      "difficulty": "moderate",
+      "status": "approved",
+      "marks": 2,
+      "validation": {
+        "valid": true,
+        "score": 4,
+        "issues": [],
+        "fix": null
+      }
+    },
+    {
+      "id": 8,
+      "subject": "SST",
+      "competency": "Historical Changes",
+      "lo": "Evaluate historical interpretation of findings",
+      "question": "If a historian finds a royal inscription carved in stone, what does this tell us about the power structure of that society?",
+      "options": [
+        "A) Society was completely equal with no leaders",
+        "B) There was a central authority with the power to record events",
+        "C) Writing was used only for personal letters",
+        "D) No one knew how to read or write at that time"
+      ],
+      "answer": "B",
+      "difficulty": "advanced",
+      "status": "pending",
+      "marks": 1,
+      "validation": {
+        "valid": true,
+        "score": 9,
+        "issues": [],
+        "fix": null
+      }
+    },
+    {
+      "id": 1,
+      "subject": "Sanskrit",
+      "competency": "Reading Comprehension",
+      "lo": "Analyze short narrative passages",
+      "question": "एकस्मिन् वने एकः वानरः वसति स्म। सः प्रतिदिनं फलानि खादति स्म। वानरस्य भोजनविषये किं ज्ञायते?",
+      "options": [
+        "A) सः केवलं जलं पिबति स्म।",
+        "B) सः प्रतिदिनं फलानि खादति स्म।",
+        "C) सः कन्दमूलानि खादति स्म।",
+        "D) सः भोजनं न करोति स्म।"
+      ],
+      "answer": "B",
+      "difficulty": "basic",
+      "status": "pending",
+      "marks": 1,
+      "validation": {
+        "valid": true,
+        "score": 3,
+        "issues": [],
+        "fix": null
+      }
+    },
+    {
+      "id": 2,
+      "subject": "Sanskrit",
+      "competency": "Reading Comprehension",
+      "lo": "Extract meaning from simple sentences",
+      "question": "रविः विद्यालयं गच्छति। सः तत्र पठति। रविः किं कर्तुं विद्यालयं गच्छति?",
+      "options": ["A) क्रीडितुम्", "B) खादितुम्", "C) पठितुम्", "D) भ्रमितुम्"],
+      "answer": "C",
+      "difficulty": "basic",
+      "status": "pending",
+      "marks": 1,
+      "validation": {
+        "valid": true,
+        "score": 3,
+        "issues": [],
+        "fix": null
+      }
+    },
+    {
+      "id": 3,
+      "subject": "Sanskrit",
+      "competency": "Reading Comprehension",
+      "lo": "Identify relationships in text",
+      "question": "गीतायाः माता पाकं करोति। सा सुस्वादु भोजनं पचति। का भोजनं पचति?",
+      "options": ["A) गीता", "B) गीतायाः माता", "C) पिता", "D) भ्राता"],
+      "answer": "B",
+      "difficulty": "proficient",
+      "status": "pending",
+      "marks": 1,
+      "validation": {
+        "valid": true,
+        "score": 8,
+        "issues": [],
+        "fix": null
+      }
+    },
+    {
+      "id": 4,
+      "subject": "Sanskrit",
+      "competency": "Reading Comprehension",
+      "lo": "Interpret context of actions",
+      "question": "कृषकः क्षेत्रे बीजं वपति। कृषकः बीजं किमर्थं वपति?",
+      "options": [
+        "A) केवलं क्रीडनार्थम्",
+        "B) सस्योत्पत्तये",
+        "C) विश्रामार्थम्",
+        "D) भ्रमणार्थम्"
+      ],
+      "answer": "B",
+      "difficulty": "basic",
+      "status": "pending",
+      "marks": 1,
+      "validation": {
+        "valid": true,
+        "score": 3,
+        "issues": [],
+        "fix": null
+      }
+    },
+    {
+      "id": 5,
+      "subject": "Sanskrit",
+      "competency": "Reading Comprehension",
+      "lo": "Synthesize information from text",
+      "question": "आकाशे खगाः उत्पतन्ति। ते मधुरं कूजन्ति। यदि खगाः आकाशे उत्पतन्ति, तर्हि तस्य वातावरणस्य उपरि तेषां कः प्रभावः भवति?",
+      "options": [
+        "A) ते भूमौ विश्रामं कुर्वन्ति।",
+        "B) ते आकाशस्य विस्तारं मधुरकूजनेन पूरयन्ति।",
+        "C) ते जलं पिबन्ति।",
+        "D) ते केवलं वृक्षेषु वसन्ति।"
+      ],
+      "answer": "B",
+      "difficulty": "proficient",
+      "status": "pending",
+      "marks": 1,
+      "validation": {
+        "valid": true,
+        "score": 3,
+        "issues": [],
+        "fix": null
+      }
+    },
+    {
+      "id": 6,
+      "subject": "Sanskrit",
+      "competency": "Reading Comprehension",
+      "lo": "Infer implied meaning",
+      "question": "अद्य रविवासरः अस्ति। अद्य विद्यालयः अवकाशः अस्ति। विद्यालयः कस्मिन् दिने अवकाशः भवति?",
+      "options": ["A) सोमवासरे", "B) रविवासरे", "C) मंगलवासरे", "D) बुधवासरे"],
+      "answer": "B",
+      "difficulty": "advanced",
+      "status": "pending",
+      "marks": 1,
+      "validation": {
+        "valid": true,
+        "score": 9,
+        "issues": [],
+        "fix": null
+      }
+    },
+    {
+      "id": 7,
+      "subject": "Sanskrit",
+      "competency": "Reading Comprehension",
+      "lo": "Analyze character intent",
+      "question": "बालकः कन्दुक्रेन क्रीडति। सः प्रसन्नाः अस्ति। बालकः कथं क्रीडति?",
+      "options": ["A) कन्दुक्रेन", "B) पत्राणि", "C) मित्रैः", "D) जलक्रीडया"],
+      "answer": "A",
+      "difficulty": "advanced",
+      "status": "pending",
+      "marks": 1,
+      "validation": {
+        "valid": true,
+        "score": 8,
+        "issues": [],
+        "fix": null
+      }
+    }
+  ],
+  "agentSessionId": "1782713796176",
+  "ragContexts": {
+    "Hindi": [
+      {
+        "id": "c34cfb7d-104f-4a55-a63a-60b236085058",
+        "score": 0.780666053,
+        "title": "LAT guidance",
+        "source": "manual",
+        "text": "Grade-wise learning outcomes for Hindi, English, Math, EVS, Science, SST, Sanskrit.\n\nCompetency descriptions:\nMath - Fraction Applications: Students solve real-life problems involving fractions, sharing, measurement, money, and comparison.\n\nQuestion design rules:\nQuestions must test application and analysis, not direct memory recall.\nUse Indian names, places, rupee currency, school and daily-life contexts.\nEach question must have 4 options and exactly one correct answer.\n\nDifficulty rubric:\nBasic questions use one-step familiar situations.\nProficient questions use two-step real-life situations.\nAdvanced questions require comparison, reasoning, or interpretation.\n\nSample context:\nFor Grade 6 baseline, questions should be at Grade 5 level.\nFor Grade 8 baseline, questions should be at Grade 7 level.",
+        "grade": "6"
+      },
+      {
+        "id": "37a57754-9e70-42f5-a65a-77e73e332ce1",
+        "score": 0.780666053,
+        "title": "LAT guidance",
+        "source": "manual",
+        "text": "Grade-wise learning outcomes for Hindi, English, Math, EVS, Science, SST, Sanskrit.\n\nCompetency descriptions:\nMath - Fraction Applications: Students solve real-life problems involving fractions, sharing, measurement, money, and comparison.\n\nQuestion design rules:\nQuestions must test application and analysis, not direct memory recall.\nUse Indian names, places, rupee currency, school and daily-life contexts.\nEach question must have 4 options and exactly one correct answer.\n\nDifficulty rubric:\nBasic questions use one-step familiar situations.\nProficient questions use two-step real-life situations.\nAdvanced questions require comparison, reasoning, or interpretation.\n\nSample context:\nFor Grade 6 baseline, questions should be at Grade 5 level.\nFor Grade 8 baseline, questions should be at Grade 7 level.",
+        "grade": "6"
+      },
+      {
+        "id": "a5884bdb-c337-4bf0-aab2-78179dbf3ffe",
+        "score": 0.780666053,
+        "title": "LAT guidance",
+        "source": "manual",
+        "text": "Grade-wise learning outcomes for Hindi, English, Math, EVS, Science, SST, Sanskrit.\n\nCompetency descriptions:\nMath - Fraction Applications: Students solve real-life problems involving fractions, sharing, measurement, money, and comparison.\n\nQuestion design rules:\nQuestions must test application and analysis, not direct memory recall.\nUse Indian names, places, rupee currency, school and daily-life contexts.\nEach question must have 4 options and exactly one correct answer.\n\nDifficulty rubric:\nBasic questions use one-step familiar situations.\nProficient questions use two-step real-life situations.\nAdvanced questions require comparison, reasoning, or interpretation.\n\nSample context:\nFor Grade 6 baseline, questions should be at Grade 5 level.\nFor Grade 8 baseline, questions should be at Grade 7 level.",
+        "grade": "6"
+      },
+      {
+        "id": "d40925a2-2902-4d38-8f25-06468846a738",
+        "score": 0.780666053,
+        "title": "LAT guidance",
+        "source": "manual",
+        "text": "Grade-wise learning outcomes for Hindi, English, Math, EVS, Science, SST, Sanskrit.\n\nCompetency descriptions:\nMath - Fraction Applications: Students solve real-life problems involving fractions, sharing, measurement, money, and comparison.\n\nQuestion design rules:\nQuestions must test application and analysis, not direct memory recall.\nUse Indian names, places, rupee currency, school and daily-life contexts.\nEach question must have 4 options and exactly one correct answer.\n\nDifficulty rubric:\nBasic questions use one-step familiar situations.\nProficient questions use two-step real-life situations.\nAdvanced questions require comparison, reasoning, or interpretation.\n\nSample context:\nFor Grade 6 baseline, questions should be at Grade 5 level.\nFor Grade 8 baseline, questions should be at Grade 7 level.",
+        "grade": "6"
+      }
+    ],
+    "English": [
+      {
+        "id": "70083771-962d-4bcd-8257-3b33c417d926",
+        "score": 0.766021788,
+        "title": "LAT guidance",
+        "source": "manual",
+        "text": "Grade-wise learning outcomes for Hindi, English, Math, EVS, Science, SST, Sanskrit.\n\nCompetency descriptions:\nMath - Fraction Applications: Students solve real-life problems involving fractions, sharing, measurement, money, and comparison.\n\nQuestion design rules:\nQuestions must test application and analysis, not direct memory recall.\nUse Indian names, places, rupee currency, school and daily-life contexts.\nEach question must have 4 options and exactly one correct answer.\n\nDifficulty rubric:\nBasic questions use one-step familiar situations.\nProficient questions use two-step real-life situations.\nAdvanced questions require comparison, reasoning, or interpretation.\n\nSample context:\nFor Grade 6 baseline, questions should be at Grade 5 level.\nFor Grade 8 baseline, questions should be at Grade 7 level.",
+        "grade": "6"
+      },
+      {
+        "id": "b18743b4-7783-4801-b899-c0cbae615b45",
+        "score": 0.766021788,
+        "title": "LAT guidance",
+        "source": "manual",
+        "text": "Grade-wise learning outcomes for Hindi, English, Math, EVS, Science, SST, Sanskrit.\n\nCompetency descriptions:\nMath - Fraction Applications: Students solve real-life problems involving fractions, sharing, measurement, money, and comparison.\n\nQuestion design rules:\nQuestions must test application and analysis, not direct memory recall.\nUse Indian names, places, rupee currency, school and daily-life contexts.\nEach question must have 4 options and exactly one correct answer.\n\nDifficulty rubric:\nBasic questions use one-step familiar situations.\nProficient questions use two-step real-life situations.\nAdvanced questions require comparison, reasoning, or interpretation.\n\nSample context:\nFor Grade 6 baseline, questions should be at Grade 5 level.\nFor Grade 8 baseline, questions should be at Grade 7 level.",
+        "grade": "6"
+      },
+      {
+        "id": "fcbb09a3-f3b3-4410-98ed-2401908e7f9f",
+        "score": 0.766021788,
+        "title": "LAT guidance",
+        "source": "manual",
+        "text": "Grade-wise learning outcomes for Hindi, English, Math, EVS, Science, SST, Sanskrit.\n\nCompetency descriptions:\nMath - Fraction Applications: Students solve real-life problems involving fractions, sharing, measurement, money, and comparison.\n\nQuestion design rules:\nQuestions must test application and analysis, not direct memory recall.\nUse Indian names, places, rupee currency, school and daily-life contexts.\nEach question must have 4 options and exactly one correct answer.\n\nDifficulty rubric:\nBasic questions use one-step familiar situations.\nProficient questions use two-step real-life situations.\nAdvanced questions require comparison, reasoning, or interpretation.\n\nSample context:\nFor Grade 6 baseline, questions should be at Grade 5 level.\nFor Grade 8 baseline, questions should be at Grade 7 level.",
+        "grade": "6"
+      },
+      {
+        "id": "09440b8c-64ed-41eb-9514-e57f05dac3f8",
+        "score": 0.766021788,
+        "title": "LAT guidance",
+        "source": "manual",
+        "text": "Grade-wise learning outcomes for Hindi, English, Math, EVS, Science, SST, Sanskrit.\n\nCompetency descriptions:\nMath - Fraction Applications: Students solve real-life problems involving fractions, sharing, measurement, money, and comparison.\n\nQuestion design rules:\nQuestions must test application and analysis, not direct memory recall.\nUse Indian names, places, rupee currency, school and daily-life contexts.\nEach question must have 4 options and exactly one correct answer.\n\nDifficulty rubric:\nBasic questions use one-step familiar situations.\nProficient questions use two-step real-life situations.\nAdvanced questions require comparison, reasoning, or interpretation.\n\nSample context:\nFor Grade 6 baseline, questions should be at Grade 5 level.\nFor Grade 8 baseline, questions should be at Grade 7 level.",
+        "grade": "6"
+      }
+    ],
+    "Math": [
+      {
+        "id": "d40925a2-2902-4d38-8f25-06468846a738",
+        "score": 0.7738989,
+        "title": "LAT guidance",
+        "source": "manual",
+        "text": "Grade-wise learning outcomes for Hindi, English, Math, EVS, Science, SST, Sanskrit.\n\nCompetency descriptions:\nMath - Fraction Applications: Students solve real-life problems involving fractions, sharing, measurement, money, and comparison.\n\nQuestion design rules:\nQuestions must test application and analysis, not direct memory recall.\nUse Indian names, places, rupee currency, school and daily-life contexts.\nEach question must have 4 options and exactly one correct answer.\n\nDifficulty rubric:\nBasic questions use one-step familiar situations.\nProficient questions use two-step real-life situations.\nAdvanced questions require comparison, reasoning, or interpretation.\n\nSample context:\nFor Grade 6 baseline, questions should be at Grade 5 level.\nFor Grade 8 baseline, questions should be at Grade 7 level.",
+        "grade": "6"
+      },
+      {
+        "id": "09440b8c-64ed-41eb-9514-e57f05dac3f8",
+        "score": 0.7738989,
+        "title": "LAT guidance",
+        "source": "manual",
+        "text": "Grade-wise learning outcomes for Hindi, English, Math, EVS, Science, SST, Sanskrit.\n\nCompetency descriptions:\nMath - Fraction Applications: Students solve real-life problems involving fractions, sharing, measurement, money, and comparison.\n\nQuestion design rules:\nQuestions must test application and analysis, not direct memory recall.\nUse Indian names, places, rupee currency, school and daily-life contexts.\nEach question must have 4 options and exactly one correct answer.\n\nDifficulty rubric:\nBasic questions use one-step familiar situations.\nProficient questions use two-step real-life situations.\nAdvanced questions require comparison, reasoning, or interpretation.\n\nSample context:\nFor Grade 6 baseline, questions should be at Grade 5 level.\nFor Grade 8 baseline, questions should be at Grade 7 level.",
+        "grade": "6"
+      },
+      {
+        "id": "70083771-962d-4bcd-8257-3b33c417d926",
+        "score": 0.7738989,
+        "title": "LAT guidance",
+        "source": "manual",
+        "text": "Grade-wise learning outcomes for Hindi, English, Math, EVS, Science, SST, Sanskrit.\n\nCompetency descriptions:\nMath - Fraction Applications: Students solve real-life problems involving fractions, sharing, measurement, money, and comparison.\n\nQuestion design rules:\nQuestions must test application and analysis, not direct memory recall.\nUse Indian names, places, rupee currency, school and daily-life contexts.\nEach question must have 4 options and exactly one correct answer.\n\nDifficulty rubric:\nBasic questions use one-step familiar situations.\nProficient questions use two-step real-life situations.\nAdvanced questions require comparison, reasoning, or interpretation.\n\nSample context:\nFor Grade 6 baseline, questions should be at Grade 5 level.\nFor Grade 8 baseline, questions should be at Grade 7 level.",
+        "grade": "6"
+      },
+      {
+        "id": "fcbb09a3-f3b3-4410-98ed-2401908e7f9f",
+        "score": 0.7738989,
+        "title": "LAT guidance",
+        "source": "manual",
+        "text": "Grade-wise learning outcomes for Hindi, English, Math, EVS, Science, SST, Sanskrit.\n\nCompetency descriptions:\nMath - Fraction Applications: Students solve real-life problems involving fractions, sharing, measurement, money, and comparison.\n\nQuestion design rules:\nQuestions must test application and analysis, not direct memory recall.\nUse Indian names, places, rupee currency, school and daily-life contexts.\nEach question must have 4 options and exactly one correct answer.\n\nDifficulty rubric:\nBasic questions use one-step familiar situations.\nProficient questions use two-step real-life situations.\nAdvanced questions require comparison, reasoning, or interpretation.\n\nSample context:\nFor Grade 6 baseline, questions should be at Grade 5 level.\nFor Grade 8 baseline, questions should be at Grade 7 level.",
+        "grade": "6"
+      }
+    ],
+    "Science": [
+      {
+        "id": "d40925a2-2902-4d38-8f25-06468846a738",
+        "score": 0.753875554,
+        "title": "LAT guidance",
+        "source": "manual",
+        "text": "Grade-wise learning outcomes for Hindi, English, Math, EVS, Science, SST, Sanskrit.\n\nCompetency descriptions:\nMath - Fraction Applications: Students solve real-life problems involving fractions, sharing, measurement, money, and comparison.\n\nQuestion design rules:\nQuestions must test application and analysis, not direct memory recall.\nUse Indian names, places, rupee currency, school and daily-life contexts.\nEach question must have 4 options and exactly one correct answer.\n\nDifficulty rubric:\nBasic questions use one-step familiar situations.\nProficient questions use two-step real-life situations.\nAdvanced questions require comparison, reasoning, or interpretation.\n\nSample context:\nFor Grade 6 baseline, questions should be at Grade 5 level.\nFor Grade 8 baseline, questions should be at Grade 7 level.",
+        "grade": "6"
+      },
+      {
+        "id": "37a57754-9e70-42f5-a65a-77e73e332ce1",
+        "score": 0.753875554,
+        "title": "LAT guidance",
+        "source": "manual",
+        "text": "Grade-wise learning outcomes for Hindi, English, Math, EVS, Science, SST, Sanskrit.\n\nCompetency descriptions:\nMath - Fraction Applications: Students solve real-life problems involving fractions, sharing, measurement, money, and comparison.\n\nQuestion design rules:\nQuestions must test application and analysis, not direct memory recall.\nUse Indian names, places, rupee currency, school and daily-life contexts.\nEach question must have 4 options and exactly one correct answer.\n\nDifficulty rubric:\nBasic questions use one-step familiar situations.\nProficient questions use two-step real-life situations.\nAdvanced questions require comparison, reasoning, or interpretation.\n\nSample context:\nFor Grade 6 baseline, questions should be at Grade 5 level.\nFor Grade 8 baseline, questions should be at Grade 7 level.",
+        "grade": "6"
+      },
+      {
+        "id": "a5884bdb-c337-4bf0-aab2-78179dbf3ffe",
+        "score": 0.753875554,
+        "title": "LAT guidance",
+        "source": "manual",
+        "text": "Grade-wise learning outcomes for Hindi, English, Math, EVS, Science, SST, Sanskrit.\n\nCompetency descriptions:\nMath - Fraction Applications: Students solve real-life problems involving fractions, sharing, measurement, money, and comparison.\n\nQuestion design rules:\nQuestions must test application and analysis, not direct memory recall.\nUse Indian names, places, rupee currency, school and daily-life contexts.\nEach question must have 4 options and exactly one correct answer.\n\nDifficulty rubric:\nBasic questions use one-step familiar situations.\nProficient questions use two-step real-life situations.\nAdvanced questions require comparison, reasoning, or interpretation.\n\nSample context:\nFor Grade 6 baseline, questions should be at Grade 5 level.\nFor Grade 8 baseline, questions should be at Grade 7 level.",
+        "grade": "6"
+      },
+      {
+        "id": "fcbb09a3-f3b3-4410-98ed-2401908e7f9f",
+        "score": 0.753875554,
+        "title": "LAT guidance",
+        "source": "manual",
+        "text": "Grade-wise learning outcomes for Hindi, English, Math, EVS, Science, SST, Sanskrit.\n\nCompetency descriptions:\nMath - Fraction Applications: Students solve real-life problems involving fractions, sharing, measurement, money, and comparison.\n\nQuestion design rules:\nQuestions must test application and analysis, not direct memory recall.\nUse Indian names, places, rupee currency, school and daily-life contexts.\nEach question must have 4 options and exactly one correct answer.\n\nDifficulty rubric:\nBasic questions use one-step familiar situations.\nProficient questions use two-step real-life situations.\nAdvanced questions require comparison, reasoning, or interpretation.\n\nSample context:\nFor Grade 6 baseline, questions should be at Grade 5 level.\nFor Grade 8 baseline, questions should be at Grade 7 level.",
+        "grade": "6"
+      }
+    ],
+    "SST": [
+      {
+        "id": "09440b8c-64ed-41eb-9514-e57f05dac3f8",
+        "score": 0.74186337,
+        "title": "LAT guidance",
+        "source": "manual",
+        "text": "Grade-wise learning outcomes for Hindi, English, Math, EVS, Science, SST, Sanskrit.\n\nCompetency descriptions:\nMath - Fraction Applications: Students solve real-life problems involving fractions, sharing, measurement, money, and comparison.\n\nQuestion design rules:\nQuestions must test application and analysis, not direct memory recall.\nUse Indian names, places, rupee currency, school and daily-life contexts.\nEach question must have 4 options and exactly one correct answer.\n\nDifficulty rubric:\nBasic questions use one-step familiar situations.\nProficient questions use two-step real-life situations.\nAdvanced questions require comparison, reasoning, or interpretation.\n\nSample context:\nFor Grade 6 baseline, questions should be at Grade 5 level.\nFor Grade 8 baseline, questions should be at Grade 7 level.",
+        "grade": "6"
+      },
+      {
+        "id": "fcbb09a3-f3b3-4410-98ed-2401908e7f9f",
+        "score": 0.74186337,
+        "title": "LAT guidance",
+        "source": "manual",
+        "text": "Grade-wise learning outcomes for Hindi, English, Math, EVS, Science, SST, Sanskrit.\n\nCompetency descriptions:\nMath - Fraction Applications: Students solve real-life problems involving fractions, sharing, measurement, money, and comparison.\n\nQuestion design rules:\nQuestions must test application and analysis, not direct memory recall.\nUse Indian names, places, rupee currency, school and daily-life contexts.\nEach question must have 4 options and exactly one correct answer.\n\nDifficulty rubric:\nBasic questions use one-step familiar situations.\nProficient questions use two-step real-life situations.\nAdvanced questions require comparison, reasoning, or interpretation.\n\nSample context:\nFor Grade 6 baseline, questions should be at Grade 5 level.\nFor Grade 8 baseline, questions should be at Grade 7 level.",
+        "grade": "6"
+      },
+      {
+        "id": "70083771-962d-4bcd-8257-3b33c417d926",
+        "score": 0.74186337,
+        "title": "LAT guidance",
+        "source": "manual",
+        "text": "Grade-wise learning outcomes for Hindi, English, Math, EVS, Science, SST, Sanskrit.\n\nCompetency descriptions:\nMath - Fraction Applications: Students solve real-life problems involving fractions, sharing, measurement, money, and comparison.\n\nQuestion design rules:\nQuestions must test application and analysis, not direct memory recall.\nUse Indian names, places, rupee currency, school and daily-life contexts.\nEach question must have 4 options and exactly one correct answer.\n\nDifficulty rubric:\nBasic questions use one-step familiar situations.\nProficient questions use two-step real-life situations.\nAdvanced questions require comparison, reasoning, or interpretation.\n\nSample context:\nFor Grade 6 baseline, questions should be at Grade 5 level.\nFor Grade 8 baseline, questions should be at Grade 7 level.",
+        "grade": "6"
+      },
+      {
+        "id": "c34cfb7d-104f-4a55-a63a-60b236085058",
+        "score": 0.74186337,
+        "title": "LAT guidance",
+        "source": "manual",
+        "text": "Grade-wise learning outcomes for Hindi, English, Math, EVS, Science, SST, Sanskrit.\n\nCompetency descriptions:\nMath - Fraction Applications: Students solve real-life problems involving fractions, sharing, measurement, money, and comparison.\n\nQuestion design rules:\nQuestions must test application and analysis, not direct memory recall.\nUse Indian names, places, rupee currency, school and daily-life contexts.\nEach question must have 4 options and exactly one correct answer.\n\nDifficulty rubric:\nBasic questions use one-step familiar situations.\nProficient questions use two-step real-life situations.\nAdvanced questions require comparison, reasoning, or interpretation.\n\nSample context:\nFor Grade 6 baseline, questions should be at Grade 5 level.\nFor Grade 8 baseline, questions should be at Grade 7 level.",
+        "grade": "6"
+      }
+    ],
+    "Sanskrit": [
+      {
+        "id": "fcbb09a3-f3b3-4410-98ed-2401908e7f9f",
+        "score": 0.757755399,
+        "title": "LAT guidance",
+        "source": "manual",
+        "text": "Grade-wise learning outcomes for Hindi, English, Math, EVS, Science, SST, Sanskrit.\n\nCompetency descriptions:\nMath - Fraction Applications: Students solve real-life problems involving fractions, sharing, measurement, money, and comparison.\n\nQuestion design rules:\nQuestions must test application and analysis, not direct memory recall.\nUse Indian names, places, rupee currency, school and daily-life contexts.\nEach question must have 4 options and exactly one correct answer.\n\nDifficulty rubric:\nBasic questions use one-step familiar situations.\nProficient questions use two-step real-life situations.\nAdvanced questions require comparison, reasoning, or interpretation.\n\nSample context:\nFor Grade 6 baseline, questions should be at Grade 5 level.\nFor Grade 8 baseline, questions should be at Grade 7 level.",
+        "grade": "6"
+      },
+      {
+        "id": "d40925a2-2902-4d38-8f25-06468846a738",
+        "score": 0.757755399,
+        "title": "LAT guidance",
+        "source": "manual",
+        "text": "Grade-wise learning outcomes for Hindi, English, Math, EVS, Science, SST, Sanskrit.\n\nCompetency descriptions:\nMath - Fraction Applications: Students solve real-life problems involving fractions, sharing, measurement, money, and comparison.\n\nQuestion design rules:\nQuestions must test application and analysis, not direct memory recall.\nUse Indian names, places, rupee currency, school and daily-life contexts.\nEach question must have 4 options and exactly one correct answer.\n\nDifficulty rubric:\nBasic questions use one-step familiar situations.\nProficient questions use two-step real-life situations.\nAdvanced questions require comparison, reasoning, or interpretation.\n\nSample context:\nFor Grade 6 baseline, questions should be at Grade 5 level.\nFor Grade 8 baseline, questions should be at Grade 7 level.",
+        "grade": "6"
+      },
+      {
+        "id": "70083771-962d-4bcd-8257-3b33c417d926",
+        "score": 0.757755399,
+        "title": "LAT guidance",
+        "source": "manual",
+        "text": "Grade-wise learning outcomes for Hindi, English, Math, EVS, Science, SST, Sanskrit.\n\nCompetency descriptions:\nMath - Fraction Applications: Students solve real-life problems involving fractions, sharing, measurement, money, and comparison.\n\nQuestion design rules:\nQuestions must test application and analysis, not direct memory recall.\nUse Indian names, places, rupee currency, school and daily-life contexts.\nEach question must have 4 options and exactly one correct answer.\n\nDifficulty rubric:\nBasic questions use one-step familiar situations.\nProficient questions use two-step real-life situations.\nAdvanced questions require comparison, reasoning, or interpretation.\n\nSample context:\nFor Grade 6 baseline, questions should be at Grade 5 level.\nFor Grade 8 baseline, questions should be at Grade 7 level.",
+        "grade": "6"
+      },
+      {
+        "id": "09440b8c-64ed-41eb-9514-e57f05dac3f8",
+        "score": 0.757755399,
+        "title": "LAT guidance",
+        "source": "manual",
+        "text": "Grade-wise learning outcomes for Hindi, English, Math, EVS, Science, SST, Sanskrit.\n\nCompetency descriptions:\nMath - Fraction Applications: Students solve real-life problems involving fractions, sharing, measurement, money, and comparison.\n\nQuestion design rules:\nQuestions must test application and analysis, not direct memory recall.\nUse Indian names, places, rupee currency, school and daily-life contexts.\nEach question must have 4 options and exactly one correct answer.\n\nDifficulty rubric:\nBasic questions use one-step familiar situations.\nProficient questions use two-step real-life situations.\nAdvanced questions require comparison, reasoning, or interpretation.\n\nSample context:\nFor Grade 6 baseline, questions should be at Grade 5 level.\nFor Grade 8 baseline, questions should be at Grade 7 level.",
+        "grade": "6"
+      }
+    ]
+  },
+  "createdAt": "2026-06-29T06:19:28.916Z"
+}

@@ -1,0 +1,76 @@
+.button {
+  min-height: 2.65rem;
+  border: 0;
+  border-radius: 0.75rem;
+  background: #0e737d;
+  color: #ffffff;
+  cursor: pointer;
+  font: inherit;
+  font-weight: 800;
+  padding: 0 1rem;
+}
+
+.input,
+.select {
+  width: 100%;
+  min-height: 2.65rem;
+  border: 1px solid #d7e2ea;
+  border-radius: 0.75rem;
+  background: #ffffff;
+  color: #172033;
+  font: inherit;
+  padding: 0 0.85rem;
+}
+
+.modalBackdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(15, 23, 42, 0.42);
+  padding: 1rem;
+}
+
+.modal {
+  width: min(100%, 38rem);
+  border-radius: 1rem;
+  background: #ffffff;
+  box-shadow: 0 30px 90px rgba(15, 23, 42, 0.24);
+  padding: 1.35rem;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.pagination {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.empty {
+  border: 1px dashed #cbd8e2;
+  border-radius: 1rem;
+  background: #ffffff;
+  color: #607086;
+  padding: 2rem;
+  text-align: center;
+}
+
+.skeleton {
+  min-height: 12rem;
+  border-radius: 1rem;
+  background: linear-gradient(90deg, #eef3f7, #f8fafc, #eef3f7);
+  background-size: 200% 100%;
+  animation: shimmer 1.2s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+  to {
+    background-position-x: -200%;
+  }
+}

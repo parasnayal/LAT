@@ -1,0 +1,498 @@
+.dashboard {
+  display: grid;
+  gap: 1.35rem;
+}
+
+.welcome,
+.card,
+.largeCard,
+.kpiCard,
+.metricStrip article {
+  border: 1px solid #e2e8f0;
+  border-radius: 16px;
+  background: #ffffff;
+  box-shadow: 0 18px 50px rgba(15, 23, 42, 0.06);
+}
+
+.welcome {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  padding: 1.6rem;
+}
+
+.welcome p,
+.welcome span {
+  margin: 0;
+  color: #64748b;
+  font-weight: 700;
+}
+
+.welcome h2 {
+  margin: 0.25rem 0;
+  color: #0f172a;
+  font-size: clamp(1.8rem, 4vw, 3rem);
+  line-height: 1;
+}
+
+.welcomeActions,
+.toolbarActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.primaryButton,
+.secondaryButton,
+.smallButton,
+.linkButton {
+  min-height: 2.6rem;
+  border-radius: 0.8rem;
+  cursor: pointer;
+  font: inherit;
+  font-size: 0.9rem;
+  font-weight: 850;
+  padding: 0 1rem;
+  transition:
+    transform 160ms ease,
+    box-shadow 160ms ease;
+}
+
+.primaryButton {
+  border: 0;
+  background: #2563eb;
+  color: #ffffff;
+  box-shadow: 0 14px 30px rgba(37, 99, 235, 0.22);
+}
+
+.secondaryButton,
+.smallButton,
+.linkButton {
+  border: 1px solid #e2e8f0;
+  background: #ffffff;
+  color: #0f172a;
+}
+
+.primaryButton:hover,
+.secondaryButton:hover,
+.smallButton:hover,
+.linkButton:hover,
+.actionCard:hover,
+.kpiCard:hover {
+  transform: translateY(-2px);
+}
+
+.kpiGrid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.kpiCard {
+  padding: 1rem;
+  transition:
+    transform 160ms ease,
+    box-shadow 160ms ease;
+}
+
+.kpiTop,
+.kpiValueRow,
+.sectionHeading,
+.assessmentItem,
+.progressRow > div:first-child {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.icon_blue,
+.icon_green,
+.icon_amber {
+  display: grid;
+  width: 2.6rem;
+  height: 2.6rem;
+  place-items: center;
+  border-radius: 0.85rem;
+}
+
+.icon_blue {
+  background: #eff6ff;
+  color: #2563eb;
+}
+
+.icon_green {
+  background: #ecfdf5;
+  color: #22c55e;
+}
+
+.icon_amber {
+  background: #fffbeb;
+  color: #f59e0b;
+}
+
+.miniTrend {
+  width: 4.5rem;
+  color: #2563eb;
+}
+
+.kpiTitle {
+  margin: 1rem 0 0;
+  color: #64748b;
+  font-size: 0.82rem;
+  font-weight: 800;
+}
+
+.kpiValueRow strong {
+  color: #0f172a;
+  font-size: 1.8rem;
+  line-height: 1.1;
+}
+
+.kpiValueRow span {
+  color: #16a34a;
+  font-size: 0.8rem;
+  font-weight: 850;
+}
+
+.chartGrid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.45fr) minmax(22rem, 0.55fr);
+  gap: 1rem;
+}
+
+.twoColumn,
+.analyticsGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.analyticsGrid {
+  grid-template-columns: minmax(0, 1.3fr) minmax(18rem, 0.7fr) minmax(18rem, 0.7fr);
+}
+
+.card,
+.largeCard {
+  padding: 1.15rem;
+}
+
+.sectionHeading {
+  justify-content: flex-start;
+  margin-bottom: 1rem;
+}
+
+.sectionHeading > span {
+  display: grid;
+  width: 2.4rem;
+  height: 2.4rem;
+  place-items: center;
+  border-radius: 0.75rem;
+  background: #eff6ff;
+  color: #2563eb;
+}
+
+.sectionHeading h2 {
+  margin: 0;
+  color: #0f172a;
+  font-size: 1.04rem;
+}
+
+.sectionHeading p {
+  margin: 0.2rem 0 0;
+  color: #64748b;
+  font-size: 0.84rem;
+}
+
+.lineChart {
+  width: 100%;
+  min-height: 16rem;
+}
+
+.doughnutWrap {
+  position: relative;
+  display: grid;
+  place-items: center;
+}
+
+.doughnut {
+  width: min(100%, 14rem);
+  transform: rotate(-90deg);
+}
+
+.doughnutCenter {
+  position: absolute;
+  top: 5.3rem;
+  display: grid;
+  text-align: center;
+}
+
+.doughnutCenter strong {
+  color: #0f172a;
+  font-size: 1.45rem;
+}
+
+.doughnutCenter span,
+.legend,
+.timelineItem span,
+.assessmentItem span,
+.metricStrip p {
+  color: #64748b;
+  font-size: 0.82rem;
+}
+
+.legend {
+  display: grid;
+  gap: 0.45rem;
+  width: 100%;
+  margin-top: 1rem;
+}
+
+.legend p {
+  display: grid;
+  grid-template-columns: 0.6rem 1fr auto;
+  gap: 0.5rem;
+  align-items: center;
+  margin: 0;
+}
+
+.legend i {
+  width: 0.55rem;
+  height: 0.55rem;
+  border-radius: 999px;
+}
+
+.timeline {
+  display: grid;
+  gap: 1rem;
+}
+
+.timelineItem {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 0.75rem;
+  align-items: start;
+}
+
+.timelineDot {
+  width: 0.7rem;
+  height: 0.7rem;
+  margin-top: 0.35rem;
+  border-radius: 999px;
+  background: #2563eb;
+  box-shadow: 0 0 0 4px #dbeafe;
+}
+
+.timelineItem p,
+.assessmentItem p,
+.progressRow p,
+.actionCard span {
+  margin: 0;
+  color: #0f172a;
+  font-weight: 850;
+}
+
+.timelineItem time {
+  color: #94a3b8;
+  font-size: 0.78rem;
+}
+
+.linkButton {
+  margin-top: 1rem;
+}
+
+.assessmentList {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.assessmentItem {
+  grid-template-columns: 1fr auto auto auto;
+  border: 1px solid #f1f5f9;
+  border-radius: 0.9rem;
+  padding: 0.85rem;
+}
+
+.assessmentMeta {
+  display: grid;
+  color: #0f172a;
+  text-align: right;
+}
+
+.statusBadge {
+  border-radius: 999px;
+  background: #ecfdf5;
+  color: #15803d;
+  font-size: 0.75rem;
+  font-weight: 850;
+  padding: 0.35rem 0.65rem;
+}
+
+.progressGrid {
+  display: grid;
+  gap: 1rem;
+}
+
+.progressRow {
+  display: grid;
+  gap: 0.45rem;
+}
+
+.progressRow span {
+  color: #64748b;
+  font-size: 0.86rem;
+  font-weight: 800;
+}
+
+.progressTrack {
+  position: relative;
+  height: 0.65rem;
+  overflow: hidden;
+  border-radius: 999px;
+  background: #e2e8f0;
+}
+
+.progressTrack span,
+.progressTrack i {
+  position: absolute;
+  inset: 0 auto 0 0;
+  border-radius: inherit;
+}
+
+.progressTrack i {
+  width: 2px;
+  background: #0f172a;
+  opacity: 0.35;
+}
+
+.actionGrid {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 0.85rem;
+}
+
+.actionCard {
+  display: grid;
+  gap: 0.55rem;
+  min-height: 10.5rem;
+  border: 1px solid #e2e8f0;
+  border-radius: 1rem;
+  background: #ffffff;
+  color: #2563eb;
+  cursor: pointer;
+  padding: 1rem;
+  text-align: left;
+  transition:
+    transform 160ms ease,
+    border-color 160ms ease,
+    box-shadow 160ms ease;
+}
+
+.actionCard p {
+  margin: 0;
+  color: #64748b;
+  font-size: 0.82rem;
+  line-height: 1.45;
+}
+
+.barChart {
+  display: flex;
+  align-items: end;
+  gap: 0.8rem;
+  height: 16rem;
+  padding: 1rem;
+}
+
+.barChart span {
+  flex: 1;
+  border-radius: 999px 999px 0.35rem 0.35rem;
+  background: #2563eb;
+}
+
+.heatmap {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 0.45rem;
+}
+
+.heatmap span {
+  aspect-ratio: 1;
+  border-radius: 0.45rem;
+}
+
+.heat_1 {
+  background: #dbeafe;
+}
+
+.heat_2 {
+  background: #93c5fd;
+}
+
+.heat_3 {
+  background: #22c55e;
+}
+
+.heat_4 {
+  background: #f59e0b;
+}
+
+.metricStrip {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.metricStrip article {
+  padding: 1rem;
+}
+
+.metricStrip span {
+  color: #64748b;
+  font-size: 0.78rem;
+  font-weight: 850;
+}
+
+.metricStrip strong {
+  display: block;
+  margin-top: 0.35rem;
+  color: #0f172a;
+  font-size: 1.35rem;
+}
+
+@media (max-width: 1280px) {
+  .kpiGrid,
+  .actionGrid,
+  .metricStrip {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .chartGrid,
+  .twoColumn,
+  .analyticsGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 700px) {
+  .welcome,
+  .assessmentItem {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .welcome {
+    display: grid;
+  }
+
+  .kpiGrid,
+  .actionGrid,
+  .metricStrip {
+    grid-template-columns: 1fr;
+  }
+
+  .assessmentItem {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+}

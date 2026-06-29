@@ -1,0 +1,256 @@
+.shell {
+  min-height: 100vh;
+  background: #f8fafc;
+  color: #0f172a;
+}
+
+.sidebar {
+  position: fixed;
+  inset: 0 auto 0 0;
+  z-index: 30;
+  display: flex;
+  width: 18rem;
+  flex-direction: column;
+  border-right: 1px solid #e2e8f0;
+  background: rgba(255, 255, 255, 0.92);
+  padding: 1.25rem;
+  backdrop-filter: blur(18px);
+}
+
+.brand {
+  display: grid;
+  grid-template-columns: 2.7rem 1fr;
+  gap: 0.75rem;
+  align-items: center;
+}
+
+.brandMark {
+  display: grid;
+  width: 2.7rem;
+  height: 2.7rem;
+  place-items: center;
+  border-radius: 0.9rem;
+  background: #2563eb;
+  color: #ffffff;
+  font-size: 0.9rem;
+  font-weight: 900;
+  letter-spacing: 0.04em;
+  box-shadow: 0 14px 30px rgba(37, 99, 235, 0.22);
+}
+
+.brandName {
+  margin: 0;
+  color: #0f172a;
+  font-size: 1rem;
+  font-weight: 850;
+}
+
+.brandSubtitle {
+  margin: 0.1rem 0 0;
+  color: #64748b;
+  font-size: 0.76rem;
+  line-height: 1.35;
+}
+
+.nav {
+  display: grid;
+  gap: 0.25rem;
+  margin-top: 1.6rem;
+  overflow: auto;
+  padding-right: 0.25rem;
+}
+
+.navLink {
+  display: flex;
+  align-items: center;
+  gap: 0.72rem;
+  min-height: 2.55rem;
+  border-radius: 0.8rem;
+  color: #475569;
+  font-size: 0.9rem;
+  font-weight: 720;
+  padding: 0 0.75rem;
+  transition:
+    background 160ms ease,
+    color 160ms ease,
+    transform 160ms ease;
+}
+
+.navLink:hover,
+.navLink:focus-visible {
+  background: #eef4ff;
+  color: #1d4ed8;
+  transform: translateX(2px);
+  outline: none;
+}
+
+.helpCard {
+  margin-top: auto;
+  border: 1px solid #dbeafe;
+  border-radius: 1rem;
+  background: #f8fbff;
+  padding: 1rem;
+}
+
+.helpTitle {
+  margin: 0;
+  color: #0f172a;
+  font-size: 0.9rem;
+  font-weight: 850;
+}
+
+.helpText {
+  margin: 0.35rem 0 0.8rem;
+  color: #64748b;
+  font-size: 0.78rem;
+  line-height: 1.45;
+}
+
+.supportButton {
+  display: inline-flex;
+  min-height: 2.2rem;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.65rem;
+  background: #2563eb;
+  color: #ffffff;
+  font-size: 0.8rem;
+  font-weight: 800;
+  padding: 0 0.8rem;
+}
+
+.version {
+  margin: 0.85rem 0 0;
+  color: #94a3b8;
+  font-size: 0.75rem;
+}
+
+.content {
+  min-height: 100vh;
+  padding-left: 18rem;
+}
+
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  border-bottom: 1px solid #e2e8f0;
+  background: rgba(248, 250, 252, 0.88);
+  backdrop-filter: blur(18px);
+}
+
+.topbarInner {
+  display: grid;
+  grid-template-columns: 1fr minmax(16rem, 28rem) auto;
+  gap: 1rem;
+  align-items: center;
+  max-width: 1600px;
+  min-height: 4.5rem;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.breadcrumb {
+  margin: 0;
+  color: #64748b;
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
+.pageTitle {
+  margin: 0.2rem 0 0;
+  color: #0f172a;
+  font-size: 1.28rem;
+  font-weight: 850;
+}
+
+.search {
+  min-height: 2.6rem;
+  border: 1px solid #e2e8f0;
+  border-radius: 999px;
+  background: #ffffff;
+  color: #0f172a;
+  font: inherit;
+  padding: 0 1rem;
+  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.04);
+}
+
+.profileCluster {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.iconButton {
+  display: grid;
+  width: 2.55rem;
+  height: 2.55rem;
+  place-items: center;
+  border: 1px solid #e2e8f0;
+  border-radius: 999px;
+  background: #ffffff;
+  color: #475569;
+}
+
+.roleBadge {
+  border-radius: 999px;
+  background: #ecfdf5;
+  color: #15803d;
+  font-size: 0.75rem;
+  font-weight: 850;
+  padding: 0.35rem 0.65rem;
+}
+
+.avatar {
+  display: grid;
+  width: 2.55rem;
+  height: 2.55rem;
+  place-items: center;
+  border-radius: 999px;
+  background: #0f172a;
+  color: #ffffff;
+  font-weight: 900;
+}
+
+.main {
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+@media (max-width: 1180px) {
+  .sidebar {
+    position: static;
+    width: auto;
+    border-right: 0;
+    border-bottom: 1px solid #e2e8f0;
+  }
+
+  .nav {
+    grid-auto-flow: column;
+    grid-auto-columns: max-content;
+  }
+
+  .helpCard {
+    display: none;
+  }
+
+  .content {
+    padding-left: 0;
+  }
+
+  .topbarInner {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .topbarInner,
+  .main {
+    padding-inline: 1rem;
+  }
+
+  .profileCluster {
+    flex-wrap: wrap;
+  }
+}
