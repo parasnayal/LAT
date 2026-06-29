@@ -32,6 +32,7 @@ function timerStorageKey(assessmentId: string) {
 
 export function StudentAssessmentTestPage({ assessmentId }: { assessmentId: string }) {
   const router = useRouter();
+  
   const { showToast } = useToast();
   const assessmentQuery = useAssessment();
   const submitMutation = useSubmitAssessment();
