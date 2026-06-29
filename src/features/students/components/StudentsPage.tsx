@@ -2,7 +2,6 @@
 
 import { useMemo, useState } from "react";
 import styles from "./students.module.scss";
-import { StudentCountCard } from "./StudentCountCard";
 import { StudentFilters } from "./StudentFilters";
 import { StudentForm } from "./StudentForm";
 import { StudentTable } from "./StudentTable";
@@ -15,6 +14,7 @@ type StudentsPageProps = {
 
 export function StudentsPage({ canCreateStudent = false }: StudentsPageProps) {
   const [filters, setFilters] = useState<StudentFilterValues>({});
+  const [createOpen, setCreateOpen] = useState(false);
   const studentsQuery = useStudents();
   const createStudent = useCreateStudent();
   const students = useMemo(() => studentsQuery.data ?? [], [studentsQuery.data]);
@@ -31,42 +31,18 @@ export function StudentsPage({ canCreateStudent = false }: StudentsPageProps) {
     });
   }, [filters, students]);
 
-  const countByGrade = (grade: string) =>
-    students.filter((student) => student.grade === grade).length;
-
   return (
     <section className={styles.page}>
-      <header className={styles.header}>
-        <div>
-          <p className={styles.eyebrow}>Teacher Workspace</p>
-          <h1 className={styles.title}>Student Management</h1>
-          <p className={styles.subtitle}>
-            Create and view students for the logged-in teacher before assessment assignment.
-          </p>
-        </div>
-      </header>
-
-      <div className={styles.metricGrid}>
-        <StudentCountCard label="Total Students" value={students.length} />
-        <StudentCountCard label="Grade 3 Students" value={countByGrade("Grade 3")} />
-        <StudentCountCard label="Grade 6 Students" value={countByGrade("Grade 6")} />
-        <StudentCountCard label="Grade 9 Students" value={countByGrade("Grade 9")} />
-      </div>
-
-      <div className={canCreateStudent ? styles.contentGrid : styles.listOnlyGrid}>
-        {canCreateStudent ? (
-          <section className={styles.formCard}>
-            <StudentForm
-              isSubmitting={createStudent.isPending}
-              onSubmit={async (values) => {
-                await createStudent.mutateAsync(values);
-              }}
-            />
-          </section>
-        ) : null}
-
+      <div className={styles.listOnlyGrid}>
         <section className={styles.listCard}>
-          <h2 className={styles.sectionTitle}>Student List</h2>
+          <div className={styles.listHeader}>
+            <h2 className={styles.sectionTitle}>Student List</h2>
+            {canCreateStudent ? (
+              <button className={styles.button} type="button" onClick={() => setCreateOpen(true)}>
+                Add Student
+              </button>
+            ) : null}
+          </div>
           <StudentFilters filters={filters} onChange={setFilters} />
           {studentsQuery.isLoading ? (
             <div className={styles.skeletonStack} aria-label="Loading students">
@@ -79,6 +55,43 @@ export function StudentsPage({ canCreateStudent = false }: StudentsPageProps) {
           )}
         </section>
       </div>
+
+      {canCreateStudent && createOpen ? (
+        <div className={styles.modalBackdrop} role="presentation">
+          <section
+            className={styles.modal}
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="create-student-title"
+          >
+            <div className={styles.modalHeader}>
+              <div>
+                <h2 className={styles.modalTitle} id="create-student-title">
+                  Add Student
+                </h2>
+                <p className={styles.modalSubtitle}>
+                  Fill the required student details and assign the student to a school.
+                </p>
+              </div>
+              <button
+                className={styles.secondaryButton}
+                type="button"
+                onClick={() => setCreateOpen(false)}
+                disabled={createStudent.isPending}
+              >
+                Close
+              </button>
+            </div>
+            <StudentForm
+              isSubmitting={createStudent.isPending}
+              onSubmit={async (values) => {
+                await createStudent.mutateAsync(values);
+                setCreateOpen(false);
+              }}
+            />
+          </section>
+        </div>
+      ) : null}
     </section>
   );
 }

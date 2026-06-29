@@ -1,18 +1,18 @@
 import {
-  BarChart3,
-  BookMarked,
+  // BarChart3,
+  // BookMarked,
   BookOpenCheck,
   ClipboardList,
   FileQuestion,
   Gauge,
   GraduationCap,
-  KeyRound,
-  Layers3,
-  LibraryBig,
-  Network,
-  Settings,
+  // KeyRound,
+  // Layers3,
+  // LibraryBig,
+  // Network,
+  // Settings,
   ShieldCheck,
-  Tags,
+  // Tags,
   Users
 } from "lucide-react";
 import { RBAC_PERMISSIONS } from "@/shared/constants/rbac";
@@ -35,24 +35,24 @@ export const SIDEBAR_NAVIGATION: NavigationItem[] = [
     icon: Users,
     requiredPermissions: [RBAC_PERMISSIONS.userView]
   },
-  {
-    label: "Role Management",
-    href: ROUTES.roles,
-    icon: ShieldCheck,
-    requiredPermissions: [RBAC_PERMISSIONS.roleView]
-  },
+  // {
+  //   label: "Role Management",
+  //   href: ROUTES.roles,
+  //   icon: ShieldCheck,
+  //   requiredPermissions: [RBAC_PERMISSIONS.roleView]
+  // },
   // {
   //   label: "Permissions",
   //   href: ROUTES.permissions,
   //   icon: KeyRound,
   //   requiredPermissions: [RBAC_PERMISSIONS.permissionView]
   // },
-  {
-    label: "Curriculum",
-    href: "/curriculum",
-    icon: BookOpenCheck,
-    requiredPermissions: [RBAC_PERMISSIONS.curriculumView]
-  },
+  // {
+  //   label: "Curriculum",
+  //   href: "/curriculum",
+  //   icon: BookOpenCheck,
+  //   requiredPermissions: [RBAC_PERMISSIONS.curriculumView]
+  // },
   // {
   //   label: "Learning Outcomes",
   //   href: "/curriculum/learning-outcomes",
@@ -89,24 +89,24 @@ export const SIDEBAR_NAVIGATION: NavigationItem[] = [
   //   icon: ClipboardList,
   //   requiredPermissions: [RBAC_PERMISSIONS.curriculumView]
   // },
-  {
-    label: "Competencies",
-    href: "/curriculum/competencies",
-    icon: Network,
-    requiredPermissions: [RBAC_PERMISSIONS.competencyView]
-  },
-  {
-    label: "Curriculum Mapping",
-    href: "/curriculum/mapping",
-    icon: Network,
-    requiredPermissions: [RBAC_PERMISSIONS.competencyView]
-  },
-  {
-    label: "Question Bank",
-    href: "/questions",
-    icon: FileQuestion,
-    requiredPermissions: [RBAC_PERMISSIONS.questionView]
-  },
+  // {
+  //   label: "Competencies",
+  //   href: "/curriculum/competencies",
+  //   icon: Network,
+  //   requiredPermissions: [RBAC_PERMISSIONS.competencyView]
+  // },
+  // {
+  //   label: "Curriculum Mapping",
+  //   href: "/curriculum/mapping",
+  //   icon: Network,
+  //   requiredPermissions: [RBAC_PERMISSIONS.competencyView]
+  // },
+  // {
+  //   label: "Question Bank",
+  //   href: "/questions",
+  //   icon: FileQuestion,
+  //   requiredPermissions: [RBAC_PERMISSIONS.questionView]
+  // },
   {
     label: "AI Question Generator",
     href: "/admin/question-generator",
@@ -133,12 +133,12 @@ export const SIDEBAR_NAVIGATION: NavigationItem[] = [
     requiredPermissions: [RBAC_PERMISSIONS.assessmentAttempt],
     allowedRoles: ["super_admin", "student"]
   },
-  {
-    label: "Review Queue",
-    href: "/reviewer/questions",
-    icon: FileQuestion,
-    requiredPermissions: [RBAC_PERMISSIONS.questionReview]
-  },
+  // {
+  //   label: "Review Queue",
+  //   href: "/reviewer/questions",
+  //   icon: FileQuestion,
+  //   requiredPermissions: [RBAC_PERMISSIONS.questionReview]
+  // },
   {
     label: "Assessments",
     href: "/assessments",

@@ -50,6 +50,10 @@ function unwrapAssessmentList(data: unknown) {
   return [];
 }
 
+function isLatEnvelope(data: unknown): data is LatApiEnvelope<unknown> {
+  return Boolean(data && typeof data === "object" && "status" in data);
+}
+
 export const assessmentApi = {
   async list() {
     const response = await latApiClient.get<LatApiEnvelope<unknown>>("/assessment-list");
@@ -59,5 +63,30 @@ export const assessmentApi = {
     }
 
     return unwrapAssessmentList(response.data);
+  },
+
+  async publish(assessmentId: string) {
+    const response = await latApiClient.post<LatApiEnvelope<unknown> | string>(
+      "/publish-assessment",
+      undefined,
+      {
+        headers: {
+          accept: "text/plain"
+        },
+        params: {
+          assessmentId
+        }
+      }
+    );
+
+    if (isLatEnvelope(response.data)) {
+      if (response.data.status !== 1) {
+        throw new Error(response.data.message || "Unable to start assessment");
+      }
+
+      return response.data.message || "Assessment started";
+    }
+
+    return response.data.trim() || "Assessment started";
   }
 };

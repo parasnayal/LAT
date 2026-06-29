@@ -1,11 +1,13 @@
 export type AssessmentOption = {
   id: string;
+  optionId: number;
   label: string;
   value: string;
 };
 
 export type AssessmentQuestion = {
   id: string;
+  questionId: number;
   instruction: string;
   stimulus?: string;
   question: string;
@@ -36,6 +38,7 @@ export type StudentAnswer = {
 };
 
 export type AssessmentAnswerPayload = {
+  assessmentId?: string;
   answers: StudentAnswer[];
 };
 

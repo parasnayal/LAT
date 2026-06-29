@@ -1,13 +1,16 @@
 "use client";
 
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import { AssessmentCountCard } from "./AssessmentCountCard";
 import { AssessmentTable } from "./AssessmentTable";
 import styles from "./assessments.module.scss";
-import { useAssessments } from "../hooks/useAssessments";
+import { useAssessments, useStartAssessment } from "../hooks/useAssessments";
+import type { AssessmentListItem } from "../types/assessment.types";
 
 export function AssessmentsPage() {
+  const [selectedAssessment, setSelectedAssessment] = useState<AssessmentListItem | null>(null);
   const assessmentsQuery = useAssessments();
+  const startAssessment = useStartAssessment();
   const assessments = useMemo(() => assessmentsQuery.data ?? [], [assessmentsQuery.data]);
   const draftCount = assessments.filter(
     (assessment) => assessment.status.trim().toLowerCase() === "draft"
@@ -20,16 +23,6 @@ export function AssessmentsPage() {
 
   return (
     <section className={styles.page}>
-      <div className={styles.header}>
-        <div>
-          <p className={styles.eyebrow}>LAT Assessments</p>
-          <h1 className={styles.title}>My Assessment</h1>
-          <p className={styles.subtitle}>
-            Review saved and AI generated assessments available for admin.
-          </p>
-        </div>
-      </div>
-
       <div className={styles.metricGrid}>
         <AssessmentCountCard label="Total Assessments" value={assessments.length} />
         <AssessmentCountCard label="Draft Assessments" value={draftCount} />
@@ -62,9 +55,62 @@ export function AssessmentsPage() {
         ) : null}
 
         {!assessmentsQuery.isLoading && !assessmentsQuery.isError ? (
-          <AssessmentTable assessments={assessments} />
+          <AssessmentTable
+            assessments={assessments}
+            onStartAssessment={(assessment) => setSelectedAssessment(assessment)}
+          />
         ) : null}
       </section>
+
+      {selectedAssessment ? (
+        <div className={styles.modalBackdrop} role="presentation">
+          <section
+            className={styles.modal}
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="start-assessment-title"
+          >
+            <div className={styles.modalHeader}>
+              <div>
+                <h2 className={styles.modalTitle} id="start-assessment-title">
+                  Start Assessment
+                </h2>
+                <p className={styles.modalSubtitle}>
+                  Publish and start {selectedAssessment.assessmentName}.
+                </p>
+              </div>
+            </div>
+            <p className={styles.modalBody}>
+              Students will be able to access this assessment after it starts.
+            </p>
+            <div className={styles.modalActions}>
+              <button
+                className={styles.secondaryButton}
+                type="button"
+                disabled={startAssessment.isPending}
+                onClick={() => setSelectedAssessment(null)}
+              >
+                Cancel
+              </button>
+              <button
+                className={styles.primaryButton}
+                type="button"
+                disabled={startAssessment.isPending}
+                onClick={async () => {
+                  try {
+                    await startAssessment.mutateAsync(selectedAssessment.id);
+                    setSelectedAssessment(null);
+                  } catch {
+                    // Toast handles the error state.
+                  }
+                }}
+              >
+                {startAssessment.isPending ? "Starting..." : "Start Assessment"}
+              </button>
+            </div>
+          </section>
+        </div>
+      ) : null}
     </section>
   );
 }

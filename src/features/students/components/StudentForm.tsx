@@ -41,7 +41,7 @@ export function StudentForm({ isSubmitting, onSubmit }: StudentFormProps) {
       schoolId: 0,
       grade: "",
       gradeId: 0,
-      subject: "",
+      // subject: "",
       subjectId: undefined,
       mobileNumber: "",
       rollNumber: ""
@@ -50,9 +50,9 @@ export function StudentForm({ isSubmitting, onSubmit }: StudentFormProps) {
   });
   const selectedSchoolId = useWatch({ control, name: "schoolId" });
   const selectedGradeId = useWatch({ control, name: "gradeId" });
-  const selectedSubjectId = useWatch({ control, name: "subjectId" });
-  const subjectsQuery = useSubjectsByGrade(selectedGradeId);
-  const subjects = subjectsQuery.data ?? [];
+  // const selectedSubjectId = useWatch({ control, name: "subjectId" });
+  // const subjectsQuery = useSubjectsByGrade(selectedGradeId);
+  // const subjects = subjectsQuery.data ?? [];
 
   const submit = handleSubmit(async (values) => {
     await onSubmit({
@@ -142,8 +142,8 @@ export function StudentForm({ isSubmitting, onSubmit }: StudentFormProps) {
             const grade = grades.find((item) => item.id === gradeId);
             setValue("grade", grade?.name ?? "", { shouldValidate: true });
             setValue("gradeId", grade?.id ?? 0, { shouldValidate: true });
-            setValue("subject", "", { shouldValidate: true });
-            setValue("subjectId", undefined, { shouldValidate: true });
+            // setValue("subject", "", { shouldValidate: true });
+            // setValue("subjectId", undefined, { shouldValidate: true });
           }}
           disabled={gradesQuery.isLoading}
         >
@@ -156,33 +156,7 @@ export function StudentForm({ isSubmitting, onSubmit }: StudentFormProps) {
         </select>
         {errors.grade ? <span className={styles.error}>{errors.grade.message}</span> : null}
       </label>
-      <label className={styles.field}>
-        <span className={styles.label}>Subject</span>
-        <select
-          className={styles.select}
-          value={selectedSubjectId ?? ""}
-          onChange={(event) => {
-            const subjectId = Number(event.target.value);
-            const subject = subjects.find((item) => item.id === subjectId);
-            setValue("subject", subject?.name ?? "", { shouldValidate: true });
-            setValue("subjectId", subject?.id, { shouldValidate: true });
-          }}
-          disabled={!selectedGradeId || subjectsQuery.isLoading}
-        >
-          <option value="">
-            {!selectedGradeId
-              ? "Select grade first"
-              : subjectsQuery.isLoading
-                ? "Loading subjects..."
-                : "Select subject"}
-          </option>
-          {subjects.map((subject) => (
-            <option value={subject.id} key={subject.id}>
-              {subject.name}
-            </option>
-          ))}
-        </select>
-      </label>
+
       <label className={styles.field}>
         <span className={styles.label}>Mobile Number</span>
         <input

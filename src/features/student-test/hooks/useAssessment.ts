@@ -3,10 +3,10 @@
 import { useQuery } from "@tanstack/react-query";
 import { assessmentApi } from "../services/assessmentApi";
 
-export function useAssessment(assessmentId: string) {
+export function useAssessment() {
   return useQuery({
-    queryKey: ["student-assessment", assessmentId],
-    queryFn: () => assessmentApi.getAssessment(assessmentId),
-    enabled: Boolean(assessmentId)
+    queryKey: ["student-assessment"],
+    queryFn: () => assessmentApi.getAssessment()
+    // enabled: Boolean()
   });
 }

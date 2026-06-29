@@ -272,7 +272,9 @@ export default function AgentController() {
           "Content-Type": "application/json"
         },
         body: JSON.stringify({
-          assessmentId: 0,
+          // assessmentId: 0,
+          educationStageId: 1,
+          gradeId: Number(state.grade),
           questions: state.allQuestions.map((question) => {
             const correctAnswer = answerLetter(question.answer);
 

@@ -168,7 +168,7 @@ export function ParakhLoginPage() {
             </p>
           </div>
 
-          <div className={styles.roleHint} aria-label="Role based login hint">
+          {/* <div className={styles.roleHint} aria-label="Role based login hint">
             {roleHints.map((role) => (
               <button
                 className={role === selectedRole ? styles.roleButtonActive : styles.roleButton}
@@ -180,7 +180,7 @@ export function ParakhLoginPage() {
                 {role}
               </button>
             ))}
-          </div>
+          </div> */}
 
           <form className={styles.form} onSubmit={handleSubmit(onSubmit)} noValidate>
             <div className={styles.fieldGroup}>

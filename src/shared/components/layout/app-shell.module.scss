@@ -119,6 +119,47 @@
   padding: 0 0.8rem;
 }
 
+.sidebarFooter {
+  display: grid;
+  gap: 0.75rem;
+  margin-top: auto;
+}
+
+.logoutButton {
+  display: flex;
+  align-items: center;
+  gap: 0.72rem;
+  min-height: 2.55rem;
+  width: 100%;
+  border: 1px solid #fee2e2;
+  border-radius: 0.8rem;
+  background: #fff7f7;
+  color: #b91c1c;
+  cursor: pointer;
+  font: inherit;
+  font-size: 0.9rem;
+  font-weight: 820;
+  padding: 0 0.75rem;
+  transition:
+    background 160ms ease,
+    color 160ms ease,
+    transform 160ms ease;
+}
+
+.logoutButton:hover,
+.logoutButton:focus-visible {
+  background: #fee2e2;
+  color: #991b1b;
+  transform: translateX(2px);
+  outline: none;
+}
+
+.logoutButton:disabled {
+  cursor: not-allowed;
+  opacity: 0.7;
+  transform: none;
+}
+
 .version {
   margin: 0.85rem 0 0;
   color: #94a3b8;

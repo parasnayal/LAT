@@ -1,4 +1,5 @@
-// import { axiosClient } from "@/shared/lib/axiosClient";
+import { latApiClient } from "@/shared/lib/latApiClient";
+import type { LatApiEnvelope } from "@/shared/types/lat-lookups.types";
 import type {
   AssessmentAnswerPayload,
   AssessmentOption,
@@ -8,6 +9,33 @@ import type {
 
 type BackendRecord = Record<string, unknown>;
 
+function toNumericId(value: unknown, fallback = 0) {
+  const numericValue = Number(value);
+  return Number.isFinite(numericValue) && numericValue > 0 ? numericValue : fallback;
+}
+
+function resolveAssessmentId(assessmentId: string) {
+  return toNumericId(assessmentId, 1);
+}
+
+function parseLatEnvelope(
+  data: LatApiEnvelope<unknown> | string,
+  options: { allowPlainTextSuccess?: boolean } = {}
+): LatApiEnvelope<unknown> {
+  if (typeof data !== "string") {
+    return data;
+  }
+
+  try {
+    return JSON.parse(data) as LatApiEnvelope<unknown>;
+  } catch {
+    return {
+      status: options.allowPlainTextSuccess ? 1 : 0,
+      message: data
+    };
+  }
+}
+
 function asRecord(value: unknown): BackendRecord {
   return value && typeof value === "object" ? (value as BackendRecord) : {};
 }
@@ -15,20 +43,24 @@ function asRecord(value: unknown): BackendRecord {
 function normalizeOption(option: unknown, index: number): AssessmentOption {
   const record = asRecord(option);
   const fallbackLabel = String.fromCharCode(65 + index);
+  const optionId = toNumericId(record.optionId ?? record.id, index + 1);
 
   return {
-    id: String(record.id ?? record.optionId ?? fallbackLabel.toLowerCase()),
+    id: String(optionId),
+    optionId,
     label: String(record.label ?? fallbackLabel),
-    value: String(record.value ?? record.text ?? "")
+    value: String(record.value ?? record.text ?? record.optionText ?? "")
   };
 }
 
 function normalizeQuestion(question: unknown, index: number): AssessmentQuestion {
   const record = asRecord(question);
   const options = Array.isArray(record.options) ? record.options : [];
+  const questionId = toNumericId(record.questionId ?? record.id, index + 1);
 
   return {
-    id: String(record.id ?? record.questionId ?? `question-${index + 1}`),
+    id: String(questionId),
+    questionId,
     instruction: String(record.instruction ?? "Read the question carefully and choose one option."),
     stimulus: record.stimulus ? String(record.stimulus) : "",
     question: String(record.question ?? record.questionText ?? ""),
@@ -36,83 +68,68 @@ function normalizeQuestion(question: unknown, index: number): AssessmentQuestion
   };
 }
 
-function normalizeAssessment(payload: unknown, assessmentId: string): StudentAssessment {
+function normalizeAssessment(payload: unknown): StudentAssessment {
   const source = asRecord(payload);
-  const record = asRecord(source.response ?? source.data ?? payload);
-  const questions = Array.isArray(record.questions) ? record.questions : [];
+  const response = source.response ?? source.data ?? payload;
+  const record = Array.isArray(response) ? {} : asRecord(response);
+  const questions = Array.isArray(response)
+    ? response
+    : Array.isArray(record.questions)
+      ? record.questions
+      : [];
   const student = asRecord(record.student);
+  const firstQuestion = asRecord(questions[0]);
+  const resolvedAssessmentId = String(
+    record.id ?? firstQuestion.assessmentId ?? resolveAssessmentId("1")
+  );
 
   return {
-    id: String(record.id ?? assessmentId),
-    attemptId: String(record.attemptId ?? record.id ?? assessmentId),
-    title: String(record.title ?? "PARAKH LAT Assessment"),
-    grade: String(record.grade ?? "Grade 6"),
-    subject: String(record.subject ?? "Mathematics"),
-    topic: record.topic ? String(record.topic) : "Numbers and Operations",
+    id: resolvedAssessmentId,
+    attemptId: String(record.attemptId ?? resolvedAssessmentId),
+    title: String(record.title ?? record.assessmentName ?? "PARAKH LAT Assessment"),
+    grade: String(record.grade ?? ""),
+    subject: String(record.subject ?? ""),
+    topic: record.topic ? String(record.topic) : undefined,
     durationMinutes: Number(record.durationMinutes ?? 45),
     student: {
-      name: String(student.name ?? "Amit Kumar"),
-      rollNumber: String(student.rollNumber ?? "23G6015")
+      name: String(student.name ?? "Student"),
+      rollNumber: String(student.rollNumber ?? "")
     },
     questions: questions.map(normalizeQuestion)
   };
-}
-
-function createDummyAssessment(assessmentId: string): StudentAssessment {
-  const questions: AssessmentQuestion[] = Array.from({ length: 30 }).map((_, index) => {
-    const questionNumber = index + 1;
-
-    return {
-      id: `q${questionNumber}`,
-      instruction: "Read the situation carefully and answer the question.",
-      stimulus:
-        questionNumber === 1
-          ? "Riya has 24 apples. She gives 7 apples to her friend and 8 apples to her brother."
-          : `A Grade 6 learner solves a competency-based Mathematics problem number ${questionNumber}.`,
-      question:
-        questionNumber === 1
-          ? "How many apples are left with Riya?"
-          : `Which option best answers question ${questionNumber}?`,
-      options: [
-        { id: "a", label: "A", value: questionNumber === 1 ? "8" : "Option 1" },
-        { id: "b", label: "B", value: questionNumber === 1 ? "9" : "Option 2" },
-        { id: "c", label: "C", value: questionNumber === 1 ? "10" : "Option 3" },
-        { id: "d", label: "D", value: questionNumber === 1 ? "11" : "Option 4" }
-      ]
-    };
-  });
-
-  return normalizeAssessment(
-    {
-      id: assessmentId,
-      attemptId: `attempt-${assessmentId}`,
-      title: "Grade 6 Mathematics Assessment",
-      grade: "Grade 6",
-      subject: "Mathematics",
-      topic: "Numbers and Operations",
-      durationMinutes: 45,
-      student: {
-        name: "Amit Kumar",
-        rollNumber: "23G6015"
-      },
-      questions
-    },
-    assessmentId
-  );
 }
 
 function delay(ms = 300) {
   return new Promise((resolve) => window.setTimeout(resolve, ms));
 }
 
-export const assessmentApi = {
-  async getAssessment(assessmentId: string) {
-    // Real API:
-    // const response = await axiosClient.get<unknown>(`/student/assessments/${assessmentId}`);
-    // return normalizeAssessment(response.data, assessmentId);
+function buildSubmitPayload(assessmentId: string, payload: AssessmentAnswerPayload) {
+  return {
+    assessmentId: resolveAssessmentId(payload.assessmentId ?? assessmentId),
+    answers: payload.answers
+      .filter((answer) => answer.selectedOptionId)
+      .map((answer) => ({
+        questionId: toNumericId(answer.questionId),
+        optionId: toNumericId(answer.selectedOptionId)
+      }))
+      .filter((answer) => answer.questionId > 0 && answer.optionId > 0)
+  };
+}
 
-    await delay();
-    return createDummyAssessment(assessmentId);
+export const assessmentApi = {
+  async getAssessment() {
+    const response = await latApiClient.get<LatApiEnvelope<unknown> | string>(`/questions`, {
+      headers: {
+        accept: "text/plain"
+      }
+    });
+    const data = parseLatEnvelope(response.data, { allowPlainTextSuccess: true });
+
+    if (data.status !== 1) {
+      throw new Error(data.message || "Unable to load assessment questions");
+    }
+
+    return normalizeAssessment(data);
   },
 
   async saveAttempt(attemptId: string, payload: AssessmentAnswerPayload) {
@@ -125,11 +142,21 @@ export const assessmentApi = {
   },
 
   async submitAttempt(attemptId: string, payload: AssessmentAnswerPayload) {
-    // Real API:
-    // const response = await axiosClient.post(`/student/attempts/${attemptId}/submit`, payload);
-    // return response.data;
+    const response = await latApiClient.post<LatApiEnvelope<unknown> | string>(
+      "/submit-assessment",
+      buildSubmitPayload(attemptId, payload),
+      {
+        headers: {
+          accept: "text/plain"
+        }
+      }
+    );
+    const data = parseLatEnvelope(response.data);
 
-    await delay(250);
-    return { ok: true, attemptId, submittedAnswers: payload.answers.length };
+    if (data.status !== 1) {
+      throw new Error(data.message || "Unable to submit assessment");
+    }
+
+    return data;
   }
 };

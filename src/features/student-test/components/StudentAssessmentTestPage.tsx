@@ -12,6 +12,7 @@ import { MobileQuestionDrawer } from "./MobileQuestionDrawer";
 import { ProgressBar } from "./ProgressBar";
 import { QuestionCard } from "./QuestionCard";
 import { QuestionNavigator } from "./QuestionNavigator";
+import { StartAssessmentScreen } from "./StartAssessmentScreen";
 import { SubmitConfirmationModal } from "./SubmitConfirmationModal";
 import { useToast } from "@/shared/components/toast/toast-provider";
 import { useAssessment } from "../hooks/useAssessment";
@@ -32,7 +33,7 @@ function timerStorageKey(assessmentId: string) {
 export function StudentAssessmentTestPage({ assessmentId }: { assessmentId: string }) {
   const router = useRouter();
   const { showToast } = useToast();
-  const assessmentQuery = useAssessment(assessmentId);
+  const assessmentQuery = useAssessment();
   const submitMutation = useSubmitAssessment();
   const [currentIndex, setCurrentIndex] = useState(0);
   const [answers, setAnswers] = useState<StudentAnswer[]>(() => {
@@ -45,6 +46,7 @@ export function StudentAssessmentTestPage({ assessmentId }: { assessmentId: stri
   });
   const [isSubmitModalOpen, setIsSubmitModalOpen] = useState(false);
   const [isNavigatorOpen, setIsNavigatorOpen] = useState(false);
+  const [hasStarted, setHasStarted] = useState(false);
   const [hasSubmitted, setHasSubmitted] = useState(false);
   const assessment = assessmentQuery.data;
   const questions = assessment?.questions ?? [];
@@ -71,11 +73,11 @@ export function StudentAssessmentTestPage({ assessmentId }: { assessmentId: stri
     try {
       await submitMutation.mutateAsync({
         attemptId: assessment.attemptId,
-        payload: { answers }
+        payload: { assessmentId: assessment.id, answers }
       });
       window.localStorage.removeItem(answersStorageKey(assessmentId));
       window.localStorage.removeItem(timerStorageKey(assessmentId));
-      router.push(`/student/result/${assessment.attemptId}` as Route);
+      // router.push(`/student/result/${assessment.attemptId}` as Route);
     } catch {
       setHasSubmitted(false);
       showToast({ title: "Unable to submit assessment", variant: "error" });
@@ -84,7 +86,7 @@ export function StudentAssessmentTestPage({ assessmentId }: { assessmentId: stri
 
   const { formattedTime, isWarning } = useAssessmentTimer({
     durationMinutes: assessment?.durationMinutes ?? 45,
-    storageKey: assessment ? timerStorageKey(assessment.id) : "",
+    storageKey: assessment && hasStarted ? timerStorageKey(assessment.id) : "",
     onExpire: () => {
       void submitAssessment();
     }
@@ -93,7 +95,7 @@ export function StudentAssessmentTestPage({ assessmentId }: { assessmentId: stri
   const { lastSavedAt, hasSaveError } = useAutoSaveAssessment({
     attemptId: assessment?.attemptId,
     answers,
-    enabled: Boolean(assessment && !hasSubmitted)
+    enabled: Boolean(assessment && hasStarted && !hasSubmitted)
   });
 
   const upsertAnswer = (questionId: string, update: Partial<StudentAnswer>) => {
@@ -122,6 +124,10 @@ export function StudentAssessmentTestPage({ assessmentId }: { assessmentId: stri
 
   if (!assessment || questions.length === 0 || !currentQuestion) {
     return <EmptyState />;
+  }
+
+  if (!hasStarted) {
+    return <StartAssessmentScreen assessment={assessment} onStart={() => setHasStarted(true)} />;
   }
 
   return (

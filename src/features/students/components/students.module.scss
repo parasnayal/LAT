@@ -82,9 +82,17 @@
 }
 
 .sectionTitle {
-  margin: 0 0 1rem;
+  margin: 0;
   color: #0f172a;
   font-size: 1.05rem;
+}
+
+.listHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1rem;
 }
 
 .form {
@@ -150,6 +158,64 @@
   cursor: not-allowed;
   opacity: 0.65;
   transform: none;
+}
+
+.secondaryButton {
+  border: 1px solid #cbd5e1;
+  border-radius: 0.65rem;
+  background: #ffffff;
+  color: #334155;
+  cursor: pointer;
+  font: inherit;
+  font-weight: 800;
+  padding: 0.68rem 0.9rem;
+}
+
+.secondaryButton:disabled {
+  cursor: not-allowed;
+  opacity: 0.65;
+}
+
+.modalBackdrop {
+  position: fixed;
+  z-index: 50;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  overflow-y: auto;
+  background: rgba(15, 23, 42, 0.46);
+  padding: 1.25rem;
+}
+
+.modal {
+  width: min(42rem, 100%);
+  max-height: calc(100vh - 2.5rem);
+  overflow-y: auto;
+  border: 1px solid #e2e8f0;
+  border-radius: 1rem;
+  background: #ffffff;
+  box-shadow: 0 24px 70px rgba(15, 23, 42, 0.22);
+  padding: 1rem;
+}
+
+.modalHeader {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.modalTitle {
+  margin: 0;
+  color: #0f172a;
+  font-size: 1.2rem;
+}
+
+.modalSubtitle {
+  margin: 0.35rem 0 0;
+  color: #64748b;
+  font-size: 0.9rem;
 }
 
 .filters {
@@ -229,6 +295,8 @@
 @media (max-width: 640px) {
   .header,
   .filters,
+  .listHeader,
+  .modalHeader,
   .metricGrid {
     display: grid;
     grid-template-columns: 1fr;

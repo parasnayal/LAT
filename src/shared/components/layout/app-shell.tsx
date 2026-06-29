@@ -9,6 +9,7 @@ import {
 } from "@/features/auth/constants/auth.constants";
 import { SIDEBAR_NAVIGATION } from "@/shared/constants/navigation";
 import { parseSerializedPermissions, hasAnyPermission } from "@/shared/lib/rbac";
+import { LogoutButton } from "./logout-button";
 import styles from "./app-shell.module.scss";
 
 function parseSerializedRoles(value?: string) {
@@ -22,17 +23,31 @@ function parseSerializedRoles(value?: string) {
     .filter(Boolean);
 }
 
+function filterNavigationForRoles(
+  navigation: typeof SIDEBAR_NAVIGATION,
+  roles: string[],
+  permissions: ReturnType<typeof parseSerializedPermissions>
+) {
+  const allowedNavigation = navigation.filter(
+    (item) =>
+      hasAnyPermission(permissions, item.requiredPermissions ?? []) &&
+      (!item.allowedRoles?.length || item.allowedRoles.some((role) => roles.includes(role)))
+  );
+
+  if (roles.includes("teacher")) {
+    return allowedNavigation.filter((item) => item.label === "Students");
+  }
+
+  return allowedNavigation;
+}
+
 export async function AppShell({ children }: { children: ReactNode }) {
   const cookieStore = await cookies();
   const permissions = parseSerializedPermissions(
     cookieStore.get(AUTH_PERMISSIONS_COOKIE_NAME)?.value
   );
   const roles = parseSerializedRoles(cookieStore.get(AUTH_ROLES_COOKIE_NAME)?.value);
-  const navigation = SIDEBAR_NAVIGATION.filter(
-    (item) =>
-      hasAnyPermission(permissions, item.requiredPermissions ?? []) &&
-      (!item.allowedRoles?.length || item.allowedRoles.some((role) => roles.includes(role)))
-  );
+  const navigation = filterNavigationForRoles(SIDEBAR_NAVIGATION, roles, permissions);
 
   return (
     <div className={styles.shell}>
@@ -61,7 +76,10 @@ export async function AppShell({ children }: { children: ReactNode }) {
             Support
           </Link>
         </section> */}
-        <p className={styles.version}>v1.0.0</p>
+        <div className={styles.sidebarFooter}>
+          <LogoutButton />
+          <p className={styles.version}>v1.0.0</p>
+        </div>
       </aside>
 
       <div className={styles.content}>
