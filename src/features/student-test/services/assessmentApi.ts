@@ -9,6 +9,11 @@ import type {
 
 type BackendRecord = Record<string, unknown>;
 
+type AssessmentAvailability = {
+  isAvailable: boolean;
+  message?: string;
+};
+
 function toNumericId(value: unknown, fallback = 0) {
   const numericValue = Number(value);
   return Number.isFinite(numericValue) && numericValue > 0 ? numericValue : fallback;
@@ -40,6 +45,44 @@ function asRecord(value: unknown): BackendRecord {
   return value && typeof value === "object" ? (value as BackendRecord) : {};
 }
 
+function toBooleanAvailability(value: unknown, fallback: boolean) {
+  if (typeof value === "boolean") {
+    return value;
+  }
+
+  if (typeof value === "number") {
+    return value === 1;
+  }
+
+  if (typeof value === "string") {
+    const normalizedValue = value.trim().toLowerCase();
+    if (["true", "1", "yes", "available"].includes(normalizedValue)) {
+      return true;
+    }
+    if (["false", "0", "no", "not available", "unavailable"].includes(normalizedValue)) {
+      return false;
+    }
+  }
+
+  return fallback;
+}
+
+function normalizeAssessmentAvailability(data: LatApiEnvelope<unknown>): AssessmentAvailability {
+  const response = data.response;
+  const record = asRecord(response);
+  const explicitValue =
+    record.isAvailable ??
+    record.assessmentAvailable ??
+    record.available ??
+    record.hasAssessment ??
+    response;
+
+  return {
+    isAvailable: data.status === 1 && toBooleanAvailability(explicitValue, Boolean(response)),
+    message: data.message
+  };
+}
+
 function normalizeOption(option: unknown, index: number): AssessmentOption {
   const record = asRecord(option);
   const fallbackLabel = String.fromCharCode(65 + index);
@@ -68,6 +111,19 @@ function normalizeQuestion(question: unknown, index: number): AssessmentQuestion
   };
 }
 
+function getDurationMinutesByGradeId(gradeId: number, fallbackDuration: number) {
+  switch (gradeId) {
+    case 3:
+      return 90;
+    case 6:
+      return 120;
+    case 9:
+      return 150;
+    default:
+      return fallbackDuration;
+  }
+}
+
 function normalizeAssessment(payload: unknown): StudentAssessment {
   const source = asRecord(payload);
   const response = source.response ?? source.data ?? payload;
@@ -82,15 +138,18 @@ function normalizeAssessment(payload: unknown): StudentAssessment {
   const resolvedAssessmentId = String(
     record.id ?? firstQuestion.assessmentId ?? resolveAssessmentId("1")
   );
+  const gradeId = toNumericId(record.gradeId ?? firstQuestion.gradeId);
+  const fallbackDuration = Number(record.durationMinutes ?? firstQuestion.durationMinutes ?? 45);
 
   return {
     id: resolvedAssessmentId,
     attemptId: String(record.attemptId ?? resolvedAssessmentId),
     title: String(record.title ?? record.assessmentName ?? "PARAKH LAT Assessment"),
     grade: String(record.grade ?? ""),
+    gradeId: gradeId || undefined,
     subject: String(record.subject ?? ""),
     topic: record.topic ? String(record.topic) : undefined,
-    durationMinutes: Number(record.durationMinutes ?? 45),
+    durationMinutes: getDurationMinutesByGradeId(gradeId, fallbackDuration),
     student: {
       name: String(student.name ?? "Student"),
       rollNumber: String(student.rollNumber ?? "")
@@ -117,8 +176,19 @@ function buildSubmitPayload(assessmentId: string, payload: AssessmentAnswerPaylo
 }
 
 export const assessmentApi = {
+  async checkAssessmentAvailability() {
+    const response = await latApiClient.get<LatApiEnvelope<unknown> | string>("/check-assessment", {
+      headers: {
+        accept: "text/plain"
+      }
+    });
+    const data = parseLatEnvelope(response.data);
+
+    return normalizeAssessmentAvailability(data);
+  },
+
   async getAssessment() {
-    const response = await latApiClient.get<LatApiEnvelope<unknown> | string>(`/questions`, {
+    const response = await latApiClient.get<LatApiEnvelope<unknown> | string>("/questions", {
       headers: {
         accept: "text/plain"
       }

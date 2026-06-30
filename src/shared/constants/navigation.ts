@@ -1,5 +1,5 @@
 import {
-  // BarChart3,
+  BarChart3,
   // BookMarked,
   // BookOpenCheck,
   ClipboardList,
@@ -144,6 +144,13 @@ export const SIDEBAR_NAVIGATION: NavigationItem[] = [
     href: "/assessments",
     icon: ClipboardList,
     requiredPermissions: [RBAC_PERMISSIONS.assessmentView]
+  },
+  {
+    label: "Reports",
+    href: ROUTES.reports,
+    icon: BarChart3,
+    requiredPermissions: [RBAC_PERMISSIONS.reportView],
+    allowedRoles: ["admin", "super_admin"]
   }
   // {
   //   label: "Analytics",

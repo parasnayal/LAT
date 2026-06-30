@@ -19,7 +19,7 @@ export function AssessmentsPage() {
     (sum, assessment) => sum + assessment.totalQuestions,
     0
   );
-  const totalMarks = assessments.reduce((sum, assessment) => sum + assessment.totalMarks, 0);
+  // const totalMarks = assessments.reduce((sum, assessment) => sum + assessment.totalMarks, 0);
 
   return (
     <section className={styles.page}>
@@ -27,7 +27,7 @@ export function AssessmentsPage() {
         <AssessmentCountCard label="Total Assessments" value={assessments.length} />
         <AssessmentCountCard label="Draft Assessments" value={draftCount} />
         <AssessmentCountCard label="Total Questions" value={totalQuestions} />
-        <AssessmentCountCard label="Total Marks" value={totalMarks} />
+        {/* <AssessmentCountCard label="Total Marks" value={totalMarks} /> */}
       </div>
 
       <section className={styles.listCard}>

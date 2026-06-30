@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import styles from "./student-test.module.scss";
 import { AssessmentSubmittedLogoutScreen } from "./AssessmentSubmittedLogoutScreen";
+import { AssessmentUnavailableScreen } from "./AssessmentUnavailableScreen";
 import { AssessmentFooter } from "./AssessmentFooter";
 import { AssessmentHeader } from "./AssessmentHeader";
 import { EmptyState } from "./EmptyState";
@@ -15,6 +16,7 @@ import { StartAssessmentScreen } from "./StartAssessmentScreen";
 import { SubmitConfirmationModal } from "./SubmitConfirmationModal";
 import { useToast } from "@/shared/components/toast/toast-provider";
 import { useAssessment } from "../hooks/useAssessment";
+import { useAssessmentAvailability } from "../hooks/useAssessmentAvailability";
 import { useAssessmentTimer } from "../hooks/useAssessmentTimer";
 import { useAutoSaveAssessment } from "../hooks/useAutoSaveAssessment";
 import { useSubmitAssessment } from "../hooks/useSubmitAssessment";
@@ -31,7 +33,8 @@ function timerStorageKey(assessmentId: string) {
 
 export function StudentAssessmentTestPage({ assessmentId }: { assessmentId: string }) {
   const { showToast } = useToast();
-  const assessmentQuery = useAssessment();
+  const availabilityQuery = useAssessmentAvailability();
+  const assessmentQuery = useAssessment(Boolean(availabilityQuery.data?.isAvailable));
   const submitMutation = useSubmitAssessment();
   const [currentIndex, setCurrentIndex] = useState(0);
   const [answers, setAnswers] = useState<StudentAnswer[]>(() => {
@@ -111,8 +114,12 @@ export function StudentAssessmentTestPage({ assessmentId }: { assessmentId: stri
     });
   };
 
-  if (assessmentQuery.isLoading) {
+  if (availabilityQuery.isLoading || assessmentQuery.isLoading) {
     return <LoadingSkeleton />;
+  }
+
+  if (availabilityQuery.isError || !availabilityQuery.data?.isAvailable) {
+    return <AssessmentUnavailableScreen />;
   }
 
   if (assessmentQuery.isError) {

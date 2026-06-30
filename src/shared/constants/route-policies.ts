@@ -21,7 +21,8 @@ export const PROTECTED_ROUTE_PREFIXES = [
   "/curriculum",
   "/questions",
   "/assessments",
-  "/analytics"
+  "/analytics",
+  "/reports"
 ] as const;
 
 export const PUBLIC_ROUTE_PREFIXES = ["/login"] as const;
@@ -51,6 +52,11 @@ export const ROUTE_POLICIES: RoutePolicy[] = [
   { pattern: "/reviewer/questions", requiredPermissions: [RBAC_PERMISSIONS.questionReview] },
   { pattern: "/questions", requiredPermissions: [RBAC_PERMISSIONS.questionView] },
   { pattern: "/assessments", requiredPermissions: [RBAC_PERMISSIONS.assessmentView] },
+  {
+    pattern: "/reports",
+    requiredPermissions: [RBAC_PERMISSIONS.reportView],
+    allowedRoles: ["admin", "super_admin"]
+  },
   { pattern: "/analytics", requiredPermissions: [RBAC_PERMISSIONS.analyticsView] }
 ];
 

@@ -24,6 +24,7 @@ export type StudentAssessment = {
   attemptId: string;
   title: string;
   grade: string;
+  gradeId?: number;
   subject: string;
   topic?: string;
   durationMinutes: number;
