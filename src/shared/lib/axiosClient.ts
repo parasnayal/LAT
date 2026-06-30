@@ -1,20 +1,8 @@
 "use client";
 
 import axios from "axios";
+import { readAuthToken } from "@/features/auth/utils/auth-cookies";
 import { clientEnv } from "@/shared/config/env";
-
-function readCookie(name: string) {
-  if (typeof document === "undefined") {
-    return null;
-  }
-
-  return (
-    document.cookie
-      .split("; ")
-      .find((row) => row.startsWith(`${name}=`))
-      ?.split("=")[1] ?? null
-  );
-}
 
 export const axiosClient = axios.create({
   baseURL: clientEnv.NEXT_PUBLIC_API_BASE_URL,
@@ -25,13 +13,10 @@ export const axiosClient = axios.create({
 });
 
 axiosClient.interceptors.request.use((config) => {
-  const token =
-    typeof window !== "undefined"
-      ? (window.localStorage.getItem("accessToken") ?? readCookie("accessToken"))
-      : null;
+  const token = readAuthToken();
 
   if (token) {
-    config.headers.Authorization = `Bearer ${decodeURIComponent(token)}`;
+    config.headers.Authorization = `Bearer ${token}`;
   }
 
   return config;

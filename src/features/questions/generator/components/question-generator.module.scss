@@ -40,7 +40,7 @@
 
 .headerStats {
   display: grid;
-  grid-template-columns: repeat(3, minmax(5.75rem, 1fr));
+  grid-template-columns: repeat(4, minmax(5.75rem, 1fr));
   gap: 0.65rem;
 
   span {
@@ -371,6 +371,10 @@
   overflow: hidden;
 }
 
+.rejectedCard {
+  opacity: 0.78;
+}
+
 .cardHeader {
   display: flex;
   align-items: flex-start;
@@ -403,7 +407,8 @@
 }
 
 .difficultyBadge,
-.competencyBadge {
+.competencyBadge,
+.approvalBadge {
   display: inline-flex;
   align-items: center;
   border-radius: 999px;
@@ -421,6 +426,25 @@
 .competencyBadge {
   background: #dcfce7;
   color: #15803d;
+}
+
+.approvalBadge {
+  text-transform: capitalize;
+}
+
+.pending {
+  background: #f1f5f9;
+  color: #475569;
+}
+
+.approved {
+  background: #dcfce7;
+  color: #15803d;
+}
+
+.rejected {
+  background: #fee2e2;
+  color: #b91c1c;
 }
 
 .questionBody {

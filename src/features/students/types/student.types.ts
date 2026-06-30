@@ -1,10 +1,12 @@
 export type Student = {
   id: string;
   studentName: string;
+  email: string;
   dob: string;
   grade: string;
   gradeId?: number;
   region?: string;
+  regionId?: number;
   school?: string;
   schoolId?: number;
   subject?: string;
@@ -16,10 +18,12 @@ export type Student = {
 
 export type CreateStudentPayload = {
   studentName: string;
+  email: string;
   dob: string;
   grade: string;
   gradeId: number;
   region: string;
+  regionId: number;
   school: string;
   schoolId: number;
   subject?: string;

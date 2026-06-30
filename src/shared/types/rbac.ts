@@ -40,6 +40,7 @@ export type PermissionResource =
 export type PermissionCode = `${PermissionResource}.${PermissionAction}`;
 
 export type RoleCode =
+  | "admin"
   | "super_admin"
   | "organization_admin"
   | "curriculum_manager"

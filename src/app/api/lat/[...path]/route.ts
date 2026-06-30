@@ -1,5 +1,5 @@
 import { NextResponse, type NextRequest } from "next/server";
-import { AUTH_COOKIE_NAME } from "@/features/auth/constants/auth.constants";
+import { AUTH_TOKEN_COOKIE_NAME } from "@/features/auth/constants/auth.constants";
 import { serverEnv } from "@/shared/config/env";
 
 type RouteContext = {
@@ -28,7 +28,7 @@ async function proxyLatRequest(request: NextRequest, context: RouteContext) {
     accept: request.headers.get("accept") ?? "application/json"
   });
   const authorization =
-    asBearerToken(request.cookies.get(AUTH_COOKIE_NAME)?.value) ??
+    asBearerToken(request.cookies.get(AUTH_TOKEN_COOKIE_NAME)?.value) ??
     request.headers.get("authorization") ??
     asBearerToken(serverEnv?.LAT_API_BEARER_TOKEN);
 

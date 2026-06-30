@@ -7,7 +7,7 @@ const clientEnvSchema = z.object({
 
 const serverEnvSchema = clientEnvSchema.extend({
   API_INTERNAL_BASE_URL: z.string().url().optional(),
-  AUTH_COOKIE_NAME: z.string().default("lat_session"),
+  AUTH_COOKIE_NAME: z.string().default("lat_token"),
   LAT_API_BEARER_TOKEN: z.string().optional()
 });
 

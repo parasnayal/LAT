@@ -13,6 +13,8 @@ type QuestionPreviewCardProps = {
   isRegenerating?: boolean;
   onUpdate: (question: GeneratedQuestion) => void;
   onDuplicate: (question: GeneratedQuestion) => void;
+  onApprove: (id: string) => void;
+  onReject: (id: string) => void;
   onDelete: (id: string) => void;
   onRegenerate: (id: string) => void;
 };
@@ -23,6 +25,8 @@ export function QuestionPreviewCard({
   isRegenerating,
   onUpdate,
   onDuplicate,
+  onApprove,
+  onReject,
   onDelete,
   onRegenerate
 }: QuestionPreviewCardProps) {
@@ -55,7 +59,12 @@ export function QuestionPreviewCard({
   }
 
   return (
-    <article className={styles.card} aria-labelledby={`question-${question.id}`}>
+    <article
+      className={`${styles.card} ${
+        question.approvalStatus === "rejected" ? styles.rejectedCard : ""
+      }`}
+      aria-labelledby={`question-${question.id}`}
+    >
       <div className={styles.cardHeader}>
         <div>
           <h2 className={styles.cardTitle} id={`question-${question.id}`}>
@@ -65,9 +74,28 @@ export function QuestionPreviewCard({
           <div className={styles.badgeRow}>
             <DifficultyBadge difficulty={question.difficulty} />
             <CompetencyBadge competency={question.competency} />
+            <span className={`${styles.approvalBadge} ${styles[question.approvalStatus]}`}>
+              {question.approvalStatus}
+            </span>
           </div>
         </div>
         <div className={styles.cardActions}>
+          <button
+            className={styles.primaryButton}
+            type="button"
+            disabled={question.approvalStatus === "approved"}
+            onClick={() => onApprove(question.id)}
+          >
+            Approve
+          </button>
+          <button
+            className={styles.secondaryButton}
+            type="button"
+            disabled={isRegenerating}
+            onClick={() => onReject(question.id)}
+          >
+            {isRegenerating ? "Replacing..." : "Reject & Replace"}
+          </button>
           <button
             className={styles.secondaryButton}
             type="button"

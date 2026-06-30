@@ -18,12 +18,20 @@ export function useCreateTeacher() {
 
   return useMutation({
     mutationFn: (payload: CreateTeacherPayload) => teacherApi.create(payload),
-    onSuccess: async () => {
+    onSuccess: async (teacher) => {
       await queryClient.invalidateQueries({ queryKey: ["teachers"] });
-      showToast({ title: "Teacher created", variant: "success" });
+      showToast({
+        title: "Teacher created",
+        message: `${teacher.teacherName || teacher.userName || "Teacher"} was added successfully.`,
+        variant: "success"
+      });
     },
-    onError: () => {
-      showToast({ title: "Unable to create teacher", variant: "error" });
+    onError: (error) => {
+      showToast({
+        title: "Unable to create teacher",
+        message: error instanceof Error ? error.message : "Please check the details and try again.",
+        variant: "error"
+      });
     }
   });
 }

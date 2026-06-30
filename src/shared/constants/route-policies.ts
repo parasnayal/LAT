@@ -46,7 +46,7 @@ export const ROUTE_POLICIES: RoutePolicy[] = [
   {
     pattern: "/student/test",
     requiredPermissions: [RBAC_PERMISSIONS.assessmentAttempt],
-    allowedRoles: ["super_admin", "student"]
+    allowedRoles: ["admin", "super_admin", "student"]
   },
   { pattern: "/reviewer/questions", requiredPermissions: [RBAC_PERMISSIONS.questionReview] },
   { pattern: "/questions", requiredPermissions: [RBAC_PERMISSIONS.questionView] },

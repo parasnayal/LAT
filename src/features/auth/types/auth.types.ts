@@ -20,19 +20,31 @@ export type LoginRequest = {
 
 export type LoginResponse = {
   user: AuthUser;
+  latUser: LatLoginUser;
   accessToken: string;
   roleCode?: RoleCode;
+};
+
+export type LatLoginUser = {
+  token?: string;
+  id?: number;
+  userId?: number;
+  userName?: string;
+  fullName?: string;
+  roleId?: number;
+  genderId?: number;
+  genderName?: string;
+  email?: string;
+  schoolId?: number | null;
+  schoolName?: string | null;
+  regionId?: number | null;
+  regionName?: string | null;
+  contactNo?: string | null;
 };
 
 export type LatLoginApiResponse = {
   status: number;
   errorCode?: string;
   message?: string;
-  response?: {
-    token?: string;
-    userId?: number;
-    userName?: string;
-    fullName?: string;
-    roleId?: number;
-  };
+  response?: LatLoginUser;
 };

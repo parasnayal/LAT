@@ -20,6 +20,7 @@ export function StudentTable({ students }: { students: Student[] }) {
         <thead>
           <tr>
             <th>Student Name</th>
+            <th>Email</th>
             <th>DOB</th>
             <th>Grade</th>
             <th>Roll Number</th>
@@ -31,6 +32,7 @@ export function StudentTable({ students }: { students: Student[] }) {
           {students.map((student) => (
             <tr key={student.id}>
               <td>{student.studentName}</td>
+              <td>{student.email || "Not provided"}</td>
               <td>{formatDate(student.dob)}</td>
               <td>{student.grade}</td>
               <td>{student.rollNumber}</td>

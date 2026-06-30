@@ -1,7 +1,7 @@
 import {
   // BarChart3,
   // BookMarked,
-  BookOpenCheck,
+  // BookOpenCheck,
   ClipboardList,
   FileQuestion,
   Gauge,
@@ -11,7 +11,7 @@ import {
   // LibraryBig,
   // Network,
   // Settings,
-  ShieldCheck,
+  // ShieldCheck,
   // Tags,
   Users
 } from "lucide-react";
@@ -29,12 +29,12 @@ export type NavigationItem = {
 
 export const SIDEBAR_NAVIGATION: NavigationItem[] = [
   { label: "Dashboard", href: ROUTES.dashboard, icon: Gauge },
-  {
-    label: "Users",
-    href: ROUTES.users,
-    icon: Users,
-    requiredPermissions: [RBAC_PERMISSIONS.userView]
-  },
+  // {
+  //   label: "Users",
+  //   href: ROUTES.users,
+  //   icon: Users,
+  //   requiredPermissions: [RBAC_PERMISSIONS.userView]
+  // },
   // {
   //   label: "Role Management",
   //   href: ROUTES.roles,
@@ -131,7 +131,7 @@ export const SIDEBAR_NAVIGATION: NavigationItem[] = [
     href: "/student/test/demo-assessment",
     icon: ClipboardList,
     requiredPermissions: [RBAC_PERMISSIONS.assessmentAttempt],
-    allowedRoles: ["super_admin", "student"]
+    allowedRoles: ["admin", "super_admin", "student"]
   },
   // {
   //   label: "Review Queue",

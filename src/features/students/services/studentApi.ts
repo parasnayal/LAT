@@ -1,4 +1,5 @@
 import { latApiClient } from "@/shared/lib/latApiClient";
+import { readAuthUser } from "@/features/auth/utils/auth-cookies";
 import type { LatApiEnvelope } from "@/shared/types/lat-lookups.types";
 import type { CreateStudentPayload, Student } from "../types/student.types";
 
@@ -11,10 +12,12 @@ function normalizeStudent(item: unknown): Student {
   return {
     id: String(record.id ?? crypto.randomUUID()),
     studentName: String(record.studentName ?? ""),
+    email: String(record.email ?? ""),
     dob: String(record.dob ?? ""),
     grade: String(record.grade ?? record.gradeName ?? ""),
     gradeId: record.gradeId ? Number(record.gradeId) : undefined,
     region: String(record.region ?? record.regionName ?? ""),
+    regionId: record.regionId ? Number(record.regionId) : undefined,
     school: String(record.school ?? record.schoolName ?? ""),
     schoolId: record.schoolId ? Number(record.schoolId) : undefined,
     subject: record.subject ? String(record.subject) : undefined,
@@ -42,6 +45,11 @@ function writeStoredStudents(students: Student[]) {
   window.localStorage.setItem(STUDENT_STORAGE_KEY, JSON.stringify(students));
 }
 
+function getCreatedByUserId() {
+  const authUser = readAuthUser();
+  return Number(authUser?.id ?? authUser?.userId ?? 0);
+}
+
 export const studentApi = {
   async list() {
     // Swagger currently exposes /api/LAT/add-student for create, but no student list endpoint.
@@ -55,13 +63,15 @@ export const studentApi = {
   async create(payload: CreateStudentPayload) {
     const response = await latApiClient.post<LatApiEnvelope<unknown>>("/add-student", {
       studentName: payload.studentName,
+      email: payload.email,
       fatherName: "",
       gender: 1,
       gradeId: payload.gradeId,
       section: "A",
       rollNo: payload.rollNumber,
       schoolId: payload.schoolId,
-      createdBy: 1
+      regionId: payload.regionId,
+      createdBy: getCreatedByUserId()
     });
 
     if (response.data.status !== 1) {

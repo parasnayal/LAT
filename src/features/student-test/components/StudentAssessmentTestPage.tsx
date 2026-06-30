@@ -1,9 +1,8 @@
 "use client";
 
-import type { Route } from "next";
-import { useRouter } from "next/navigation";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import styles from "./student-test.module.scss";
+import { AssessmentSubmittedLogoutScreen } from "./AssessmentSubmittedLogoutScreen";
 import { AssessmentFooter } from "./AssessmentFooter";
 import { AssessmentHeader } from "./AssessmentHeader";
 import { EmptyState } from "./EmptyState";
@@ -31,8 +30,6 @@ function timerStorageKey(assessmentId: string) {
 }
 
 export function StudentAssessmentTestPage({ assessmentId }: { assessmentId: string }) {
-  const router = useRouter();
-  
   const { showToast } = useToast();
   const assessmentQuery = useAssessment();
   const submitMutation = useSubmitAssessment();
@@ -49,6 +46,7 @@ export function StudentAssessmentTestPage({ assessmentId }: { assessmentId: stri
   const [isNavigatorOpen, setIsNavigatorOpen] = useState(false);
   const [hasStarted, setHasStarted] = useState(false);
   const [hasSubmitted, setHasSubmitted] = useState(false);
+  const [isSubmittedSuccessfully, setIsSubmittedSuccessfully] = useState(false);
   const assessment = assessmentQuery.data;
   const questions = assessment?.questions ?? [];
   const currentQuestion = questions[currentIndex];
@@ -78,12 +76,12 @@ export function StudentAssessmentTestPage({ assessmentId }: { assessmentId: stri
       });
       window.localStorage.removeItem(answersStorageKey(assessmentId));
       window.localStorage.removeItem(timerStorageKey(assessmentId));
-      // router.push(`/student/result/${assessment.attemptId}` as Route);
+      setIsSubmittedSuccessfully(true);
     } catch {
       setHasSubmitted(false);
       showToast({ title: "Unable to submit assessment", variant: "error" });
     }
-  }, [answers, assessment, assessmentId, hasSubmitted, router, showToast, submitMutation]);
+  }, [answers, assessment, assessmentId, hasSubmitted, showToast, submitMutation]);
 
   const { formattedTime, isWarning } = useAssessmentTimer({
     durationMinutes: assessment?.durationMinutes ?? 45,
@@ -125,6 +123,10 @@ export function StudentAssessmentTestPage({ assessmentId }: { assessmentId: stri
 
   if (!assessment || questions.length === 0 || !currentQuestion) {
     return <EmptyState />;
+  }
+
+  if (isSubmittedSuccessfully) {
+    return <AssessmentSubmittedLogoutScreen />;
   }
 
   if (!hasStarted) {

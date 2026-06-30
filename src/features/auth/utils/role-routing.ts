@@ -2,6 +2,10 @@ import type { UserRole } from "../types/auth.types";
 import type { RoleCode } from "@/shared/types/rbac";
 
 export function mapRoleIdToRoleCode(roleId?: number): RoleCode {
+  if (roleId === 1) {
+    return "admin";
+  }
+
   if (roleId === 2) {
     return "reviewer";
   }
@@ -14,7 +18,7 @@ export function mapRoleIdToRoleCode(roleId?: number): RoleCode {
     return "student";
   }
 
-  return "super_admin";
+  return "admin";
 }
 
 export function mapRoleIdToUserRole(roleId?: number): UserRole {

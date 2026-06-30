@@ -22,13 +22,13 @@ function toRoleCode(name: string): RoleCode {
     .toLowerCase()
     .replace(/[^a-z0-9]+/g, "_");
   const roleCodeMap: Record<string, RoleCode> = {
-    admin: "super_admin",
+    admin: "admin",
     reviewer: "reviewer",
     student: "student",
     teacher: "teacher"
   };
 
-  return roleCodeMap[normalized] ?? "super_admin";
+  return roleCodeMap[normalized] ?? "admin";
 }
 
 function unwrapRoles(data: unknown): RoleOption[] {

@@ -22,8 +22,7 @@ export function getClientPermissions() {
     return [];
   }
 
-  const stored =
-    window.localStorage.getItem("permissions") ?? readCookie(AUTH_PERMISSIONS_COOKIE_NAME);
+  const stored = readCookie(AUTH_PERMISSIONS_COOKIE_NAME);
 
   return decodeURIComponent(stored)
     .split(",")

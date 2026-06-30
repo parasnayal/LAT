@@ -2,8 +2,10 @@ import { z } from "zod";
 
 export const studentSchema = z.object({
   studentName: z.string().min(1, "Student name is required"),
+  email: z.string().email("Enter a valid email"),
   dob: z.string().min(1, "Date of birth is required"),
   region: z.string().min(1, "Region is required"),
+  regionId: z.number().min(1, "Region is required"),
   school: z.string().min(1, "School is required"),
   schoolId: z.number().min(1, "School is required"),
   grade: z.string().min(1, "Grade is required"),

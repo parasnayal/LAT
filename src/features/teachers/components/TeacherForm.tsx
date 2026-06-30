@@ -10,14 +10,13 @@ import { useActiveRegions, useSchoolsByRegion } from "@/shared/hooks/useLatLooku
 
 type TeacherFormProps = {
   isSubmitting: boolean;
-  onSubmit: (values: TeacherFormValues) => Promise<void>;
+  onSubmit: (values: TeacherFormValues) => Promise<boolean>;
 };
 
 const defaultValues: TeacherFormValues = {
   userName: "",
   fullName: "",
   email: "",
-  password: "",
   roleId: 0,
   schoolId: 0,
   contactNumber: ""
@@ -58,9 +57,12 @@ export function TeacherForm({ isSubmitting, onSubmit }: TeacherFormProps) {
   }, [roles, selectedRoleId, setValue]);
 
   const submit = handleSubmit(async (values) => {
-    await onSubmit(values);
-    reset(defaultValues);
-    setSelectedRegionId(undefined);
+    const didCreate = await onSubmit(values);
+
+    if (didCreate) {
+      reset(defaultValues);
+      setSelectedRegionId(undefined);
+    }
   });
 
   return (
@@ -84,16 +86,6 @@ export function TeacherForm({ isSubmitting, onSubmit }: TeacherFormProps) {
           placeholder="teacher@school.org"
         />
         {errors.email ? <span className={styles.error}>{errors.email.message}</span> : null}
-      </label>
-      <label className={styles.field}>
-        <span className={styles.label}>Password *</span>
-        <input
-          className={styles.input}
-          type="password"
-          {...register("password")}
-          placeholder="Password"
-        />
-        {errors.password ? <span className={styles.error}>{errors.password.message}</span> : null}
       </label>
       <label className={styles.field}>
         <span className={styles.label}>Role *</span>

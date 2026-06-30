@@ -252,14 +252,14 @@ function WelcomeBanner() {
         <h2>Welcome back, Admin.</h2>
         <span>Manage competency-based assessments with AI.</span>
       </div>
-      <div className={styles.welcomeActions}>
+      {/* <div className={styles.welcomeActions}>
         <button className={styles.primaryButton} type="button">
           Generate Questions
         </button>
         <button className={styles.secondaryButton} type="button">
           Create Assessment
         </button>
-      </div>
+      </div> */}
     </section>
   );
 }

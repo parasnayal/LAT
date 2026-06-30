@@ -1,30 +1,82 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { useForm, useWatch } from "react-hook-form";
 import styles from "./students.module.scss";
 import { studentSchema, type StudentFormValues } from "../schemas/student.schema";
-import {
-  useActiveRegions,
-  useGrades,
-  useSchoolsByRegion,
-  useSubjectsByGrade
-} from "@/shared/hooks/useLatLookups";
+import { readAuthUser } from "@/features/auth/utils/auth-cookies";
+import { useActiveRegions, useGrades, useSchoolsByRegion } from "@/shared/hooks/useLatLookups";
 
 type StudentFormProps = {
   isSubmitting: boolean;
   onSubmit: (values: StudentFormValues) => Promise<void>;
 };
 
+const emptyDefaultValues: StudentFormValues = {
+  studentName: "",
+  email: "",
+  dob: "",
+  region: "",
+  regionId: 0,
+  school: "",
+  schoolId: 0,
+  grade: "",
+  gradeId: 0,
+  subjectId: undefined,
+  mobileNumber: "",
+  rollNumber: ""
+};
+
 export function StudentForm({ isSubmitting, onSubmit }: StudentFormProps) {
-  const [selectedRegionId, setSelectedRegionId] = useState<number | undefined>();
+  const authUser = useMemo(() => readAuthUser(), []);
+  const teacherAssignment = useMemo(() => {
+    if (
+      authUser?.roleId !== 3 ||
+      !authUser.regionId ||
+      !authUser.regionName ||
+      !authUser.schoolId ||
+      !authUser.schoolName
+    ) {
+      return null;
+    }
+
+    return {
+      regionId: authUser.regionId,
+      regionName: authUser.regionName,
+      schoolId: authUser.schoolId,
+      schoolName: authUser.schoolName
+    };
+  }, [authUser]);
+  const defaultValues = useMemo<StudentFormValues>(
+    () => ({
+      ...emptyDefaultValues,
+      region: teacherAssignment?.regionName ?? "",
+      regionId: teacherAssignment?.regionId ?? 0,
+      school: teacherAssignment?.schoolName ?? "",
+      schoolId: teacherAssignment?.schoolId ?? 0
+    }),
+    [teacherAssignment]
+  );
+  const [selectedRegionId, setSelectedRegionId] = useState<number | undefined>(
+    teacherAssignment?.regionId
+  );
   const gradesQuery = useGrades();
   const regionsQuery = useActiveRegions();
   const schoolsQuery = useSchoolsByRegion(selectedRegionId);
   const grades = gradesQuery.data ?? [];
-  const regions = regionsQuery.data ?? [];
-  const schools = schoolsQuery.data ?? [];
+  const regions = teacherAssignment
+    ? [{ id: teacherAssignment.regionId, name: teacherAssignment.regionName }]
+    : (regionsQuery.data ?? []);
+  const schools = teacherAssignment
+    ? [
+        {
+          id: teacherAssignment.schoolId,
+          name: teacherAssignment.schoolName,
+          regionId: teacherAssignment.regionId
+        }
+      ]
+    : (schoolsQuery.data ?? []);
   const {
     register,
     handleSubmit,
@@ -33,34 +85,19 @@ export function StudentForm({ isSubmitting, onSubmit }: StudentFormProps) {
     control,
     formState: { errors }
   } = useForm<StudentFormValues>({
-    defaultValues: {
-      studentName: "",
-      dob: "",
-      region: "",
-      school: "",
-      schoolId: 0,
-      grade: "",
-      gradeId: 0,
-      // subject: "",
-      subjectId: undefined,
-      mobileNumber: "",
-      rollNumber: ""
-    },
+    defaultValues,
     resolver: zodResolver(studentSchema)
   });
   const selectedSchoolId = useWatch({ control, name: "schoolId" });
   const selectedGradeId = useWatch({ control, name: "gradeId" });
-  // const selectedSubjectId = useWatch({ control, name: "subjectId" });
-  // const subjectsQuery = useSubjectsByGrade(selectedGradeId);
-  // const subjects = subjectsQuery.data ?? [];
 
   const submit = handleSubmit(async (values) => {
     await onSubmit({
       ...values,
       mobileNumber: values.mobileNumber || undefined
     });
-    reset();
-    setSelectedRegionId(undefined);
+    reset(defaultValues);
+    setSelectedRegionId(teacherAssignment?.regionId);
   });
 
   return (
@@ -72,6 +109,16 @@ export function StudentForm({ isSubmitting, onSubmit }: StudentFormProps) {
         {errors.studentName ? (
           <span className={styles.error}>{errors.studentName.message}</span>
         ) : null}
+      </label>
+      <label className={styles.field}>
+        <span className={styles.label}>Email *</span>
+        <input
+          className={styles.input}
+          type="email"
+          {...register("email")}
+          placeholder="student@school.org"
+        />
+        {errors.email ? <span className={styles.error}>{errors.email.message}</span> : null}
       </label>
       <label className={styles.field}>
         <span className={styles.label}>Date of Birth *</span>
@@ -88,10 +135,11 @@ export function StudentForm({ isSubmitting, onSubmit }: StudentFormProps) {
             const region = regions.find((item) => item.id === regionId);
             setSelectedRegionId(region?.id);
             setValue("region", region?.name ?? "", { shouldValidate: true });
+            setValue("regionId", region?.id ?? 0, { shouldValidate: true });
             setValue("school", "", { shouldValidate: true });
             setValue("schoolId", 0, { shouldValidate: true });
           }}
-          disabled={regionsQuery.isLoading}
+          disabled={Boolean(teacherAssignment) || regionsQuery.isLoading}
         >
           <option value="">
             {regionsQuery.isLoading ? "Loading regions..." : "Select region"}
@@ -115,7 +163,7 @@ export function StudentForm({ isSubmitting, onSubmit }: StudentFormProps) {
             setValue("school", school?.name ?? "", { shouldValidate: true });
             setValue("schoolId", school?.id ?? 0, { shouldValidate: true });
           }}
-          disabled={!selectedRegionId || schoolsQuery.isLoading}
+          disabled={Boolean(teacherAssignment) || !selectedRegionId || schoolsQuery.isLoading}
         >
           <option value="">
             {!selectedRegionId

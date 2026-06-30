@@ -34,6 +34,7 @@ export function QuestionGeneratorPage() {
   const isGenerating = generateQuestions.isPending;
   const areAllQuestionsReady =
     Boolean(lastContext) && questions.length >= (lastContext?.totalQuestions ?? 0);
+  const approvedQuestions = questions.filter((question) => question.approvalStatus === "approved");
   const hasOptionError =
     options.grades.isError ||
     options.subjects.isError ||
@@ -63,7 +64,9 @@ export function QuestionGeneratorPage() {
       });
       setQuestions((current) =>
         current.map((question) =>
-          question.id === questionId && regeneratedQuestion ? regeneratedQuestion : question
+          question.id === questionId && regeneratedQuestion
+            ? { ...regeneratedQuestion, approvalStatus: "pending" }
+            : question
         )
       );
     } finally {
@@ -76,9 +79,13 @@ export function QuestionGeneratorPage() {
       return;
     }
 
+    if (approvedQuestions.length === 0) {
+      return;
+    }
+
     await saveAiGeneratedQuestions.mutateAsync({
       assessmentId: 0,
-      questions: questions.map((question) => {
+      questions: approvedQuestions.map((question) => {
         const answerKey = question.answer.trim().charAt(0).toUpperCase();
 
         return {
@@ -105,9 +112,21 @@ export function QuestionGeneratorPage() {
       ...current,
       {
         ...question,
-        id: crypto.randomUUID()
+        id: crypto.randomUUID(),
+        approvalStatus: "pending"
       }
     ]);
+  }
+
+  function updateQuestionApproval(
+    questionId: string,
+    approvalStatus: GeneratedQuestion["approvalStatus"]
+  ) {
+    setQuestions((current) =>
+      current.map((question) =>
+        question.id === questionId ? { ...question, approvalStatus } : question
+      )
+    );
   }
 
   return (
@@ -124,6 +143,10 @@ export function QuestionGeneratorPage() {
           <span>
             <strong>{questions.length}</strong>
             Generated
+          </span>
+          <span>
+            <strong>{approvedQuestions.length}</strong>
+            Approved
           </span>
           <span>
             <strong>{lastContext ? lastContext.totalQuestions : 0}</strong>
@@ -179,6 +202,7 @@ export function QuestionGeneratorPage() {
               {areAllQuestionsReady ? (
                 <QuestionToolbar
                   count={questions.length}
+                  approvedCount={approvedQuestions.length}
                   isCreatingAssessment={saveAiGeneratedQuestions.isPending}
                   onCreateAssessment={handleCreateAssessment}
                 />
@@ -197,6 +221,8 @@ export function QuestionGeneratorPage() {
                     )
                   }
                   onDuplicate={handleDuplicate}
+                  onApprove={(id) => updateQuestionApproval(id, "approved")}
+                  onReject={(id) => void handleRegenerate(id)}
                   onDelete={(id) =>
                     setQuestions((current) => current.filter((item) => item.id !== id))
                   }

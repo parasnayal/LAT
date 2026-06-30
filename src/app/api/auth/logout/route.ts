@@ -2,13 +2,19 @@ import { NextResponse } from "next/server";
 import {
   AUTH_COOKIE_NAME,
   AUTH_PERMISSIONS_COOKIE_NAME,
-  AUTH_ROLES_COOKIE_NAME
+  AUTH_ROLES_COOKIE_NAME,
+  AUTH_TOKEN_COOKIE_NAME,
+  AUTH_USER_COOKIE_NAME
 } from "@/features/auth/constants/auth.constants";
 
 const AUTH_COOKIE_NAMES = [
   AUTH_COOKIE_NAME,
+  AUTH_TOKEN_COOKIE_NAME,
+  AUTH_USER_COOKIE_NAME,
   AUTH_PERMISSIONS_COOKIE_NAME,
-  AUTH_ROLES_COOKIE_NAME
+  AUTH_ROLES_COOKIE_NAME,
+  "lat_session",
+  "accessToken"
 ] as const;
 
 export function POST() {

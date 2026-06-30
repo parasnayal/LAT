@@ -1,5 +1,5 @@
 import { NextResponse, type NextRequest } from "next/server";
-import { AUTH_COOKIE_NAME } from "@/features/auth/constants/auth.constants";
+import { AUTH_TOKEN_COOKIE_NAME } from "@/features/auth/constants/auth.constants";
 import { serverEnv } from "@/shared/config/env";
 
 type RouteContext = {
@@ -23,12 +23,11 @@ async function proxyDashboardRequest(request: NextRequest, context: RouteContext
     serverEnv?.NEXT_PUBLIC_API_BASE_URL ??
     "https://faq-admin.projectinclusion.in";
   const targetUrl = new URL(`/api/LAT/dashboard/${path.join("/")}`, targetBaseUrl);
-  const authCookieName = serverEnv?.AUTH_COOKIE_NAME ?? AUTH_COOKIE_NAME;
-  const latSession = request.cookies.get(authCookieName)?.value;
+  const authToken = request.cookies.get(AUTH_TOKEN_COOKIE_NAME)?.value;
   const authorization =
-    asBearerToken(serverEnv?.LAT_API_BEARER_TOKEN) ??
+    asBearerToken(authToken ? decodeURIComponent(authToken) : null) ??
     request.headers.get("authorization") ??
-    asBearerToken(latSession ? decodeURIComponent(latSession) : null);
+    asBearerToken(serverEnv?.LAT_API_BEARER_TOKEN);
 
   request.nextUrl.searchParams.forEach((value, key) => {
     targetUrl.searchParams.set(key, value);

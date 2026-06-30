@@ -1,10 +1,17 @@
 "use client";
 
-import { SUBJECT_DISTRIBUTION } from "@/shared/lib/lat/config";
+import { SUBJECT_DISTRIBUTION, SUBJECT_LANGUAGE } from "@/shared/lib/lat/config";
 
 import { useEffect, useMemo, useRef, useState } from "react";
 
-import { AgentLog, AgentState, Question, RagIngestResponse } from "@/shared/types/lat";
+import { readAuthToken } from "@/features/auth/utils/auth-cookies";
+import {
+  AgentLog,
+  AgentState,
+  GenerateResponse,
+  Question,
+  RagIngestResponse
+} from "@/shared/types/lat";
 
 import { getGradeInfo, runLATAgent } from "@/shared/lib/lat/agent";
 
@@ -17,6 +24,17 @@ const WAITING_LOG: AgentLog = {
 const CREATE_ASSESSMENT_URL = "https://faq-admin.projectinclusion.in/api/LAT/create-assessment";
 const SAVE_AI_GENERATED_QUESTIONS_URL =
   "https://faq-admin.projectinclusion.in/api/LAT/save-ai-generated-questions";
+type QuestionApprovalStatus = "pending" | "approved" | "rejected";
+
+type ValidationResponse = {
+  results: Array<{
+    id: number;
+    valid: boolean;
+    score: number;
+    issues: string[];
+    fix: string | null;
+  }>;
+};
 
 function formatTime(timestamp: number): string {
   if (timestamp === 0) {
@@ -72,14 +90,6 @@ function answerLetter(answer: string): string {
   return answer.trim().charAt(0).toUpperCase();
 }
 
-function readAccessToken(): string | null {
-  if (typeof window === "undefined") {
-    return null;
-  }
-
-  return window.localStorage.getItem("accessToken");
-}
-
 function normalizeOptionText(option: string): string {
   return option.replace(/^[A-D][).]\s*/i, "").trim() || option;
 }
@@ -119,6 +129,39 @@ function extractAssessmentId(payload: unknown) {
   return 0;
 }
 
+function questionKey(question: Question, index: number) {
+  return `${question.subject}-${question.id}-${index}`;
+}
+
+function approvalClasses(status: QuestionApprovalStatus) {
+  const classes: Record<QuestionApprovalStatus, string> = {
+    pending: "bg-zinc-100 text-zinc-700 border-zinc-200",
+    approved: "bg-green-100 text-green-700 border-green-200",
+    rejected: "bg-red-100 text-red-700 border-red-200"
+  };
+
+  return classes[status];
+}
+
+async function postJson<TResponse>(url: string, body: unknown): Promise<TResponse> {
+  const response = await fetch(url, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(body)
+  });
+  const payload = (await response.json()) as unknown;
+
+  if (!response.ok) {
+    const message =
+      payload && typeof payload === "object" && "message" in payload
+        ? String(payload.message)
+        : "Request failed";
+    throw new Error(message);
+  }
+
+  return payload as TResponse;
+}
+
 export default function AgentController() {
   const [selectedGrade, setSelectedGrade] = useState<string>("6");
   const [state, setState] = useState<AgentState | null>(null);
@@ -130,6 +173,10 @@ export default function AgentController() {
   const [ragMessage, setRagMessage] = useState<string | null>(null);
   const [isCreatingAssessment, setIsCreatingAssessment] = useState(false);
   const [assessmentMessage, setAssessmentMessage] = useState<string | null>(null);
+  const [approvalByQuestionKey, setApprovalByQuestionKey] = useState<
+    Record<string, QuestionApprovalStatus>
+  >({});
+  const [replacingQuestionKey, setReplacingQuestionKey] = useState<string | null>(null);
   const logRef = useRef<HTMLDivElement | null>(null);
 
   const gradeInfo = useMemo(() => getGradeInfo(selectedGrade), [selectedGrade]);
@@ -144,6 +191,24 @@ export default function AgentController() {
   const progress =
     totalSubjects > 0 ? ((completedSubjects + failedSubjects) / totalSubjects) * 100 : 0;
   const visibleStatus = state?.status ?? "idle";
+  const approvedQuestions = useMemo(
+    () =>
+      (state?.allQuestions ?? []).filter(
+        (question, index) => approvalByQuestionKey[questionKey(question, index)] === "approved"
+      ),
+    [approvalByQuestionKey, state?.allQuestions]
+  );
+  const rejectedQuestionCount = useMemo(
+    () =>
+      (state?.allQuestions ?? []).filter(
+        (question, index) => approvalByQuestionKey[questionKey(question, index)] === "rejected"
+      ).length,
+    [approvalByQuestionKey, state?.allQuestions]
+  );
+  const pendingQuestionCount = Math.max(
+    0,
+    (state?.allQuestions.length ?? 0) - approvedQuestions.length - rejectedQuestionCount
+  );
 
   const difficultyCounts = useMemo(() => {
     const counts: Record<Question["difficulty"], number> = { basic: 0, proficient: 0, advanced: 0 };
@@ -163,6 +228,9 @@ export default function AgentController() {
 
   async function startAgent(): Promise<void> {
     setIsRunning(true);
+    setApprovalByQuestionKey({});
+    setReplacingQuestionKey(null);
+    setAssessmentMessage(null);
 
     try {
       await runLATAgent(selectedGrade, setState);
@@ -203,6 +271,95 @@ export default function AgentController() {
     setState(null);
     setIsRunning(false);
     setAssessmentMessage(null);
+    setApprovalByQuestionKey({});
+    setReplacingQuestionKey(null);
+  }
+
+  function updateQuestionApproval(
+    question: Question,
+    index: number,
+    approvalStatus: QuestionApprovalStatus
+  ) {
+    setApprovalByQuestionKey((current) => ({
+      ...current,
+      [questionKey(question, index)]: approvalStatus
+    }));
+  }
+
+  async function replaceRejectedQuestion(question: Question, index: number) {
+    if (!state) {
+      return;
+    }
+
+    const key = questionKey(question, index);
+    setReplacingQuestionKey(key);
+    setAssessmentMessage(null);
+
+    try {
+      const generation = await postJson<GenerateResponse>("/api/generate", {
+        grade: state.grade,
+        subject: question.subject,
+        competency: question.competency,
+        count: 1,
+        language: SUBJECT_LANGUAGE[question.subject as keyof typeof SUBJECT_LANGUAGE] ?? "English",
+        ragContext: state.ragContexts[question.subject] ?? []
+      });
+      const replacement = generation.questions[0];
+
+      if (!replacement) {
+        throw new Error("Replacement question was not generated.");
+      }
+
+      const validation = await postJson<ValidationResponse>("/api/validate", {
+        questions: [replacement]
+      }).catch(() => null);
+      const validationResult = validation?.results[0];
+      const replacementQuestion: Question = {
+        ...replacement,
+        id: Date.now(),
+        status: "pending",
+        validation: validationResult
+          ? {
+              valid: validationResult.valid,
+              score: validationResult.score,
+              issues: validationResult.issues,
+              fix: validationResult.fix
+            }
+          : replacement.validation
+      };
+
+      setState((current) => {
+        if (!current) {
+          return current;
+        }
+
+        return {
+          ...current,
+          allQuestions: current.allQuestions.map((item, itemIndex) =>
+            itemIndex === index ? replacementQuestion : item
+          ),
+          logs: [
+            ...current.logs,
+            {
+              timestamp: Date.now(),
+              type: "success",
+              subject: question.subject,
+              message: `Rejected question ${index + 1} replaced with a new question.`
+            }
+          ]
+        };
+      });
+      setApprovalByQuestionKey((current) => {
+        const next = { ...current };
+        delete next[key];
+        return next;
+      });
+    } catch (error) {
+      const message = error instanceof Error ? error.message : "Question replacement failed";
+      setAssessmentMessage(message);
+    } finally {
+      setReplacingQuestionKey(null);
+    }
   }
 
   async function ingestKnowledge(): Promise<void> {
@@ -252,9 +409,12 @@ export default function AgentController() {
       return;
     }
 
-    // const accessToken = readAccessToken();
-    const accessToken =
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVc2VySWQiOiIxIiwiVXNlck5hbWUiOiJBZG1pbiIsIlJvbGVJZCI6IjEiLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJBZG1pbiIsImV4cCI6MTc4NDAxMDk4NywiaXNzIjoiVGVzdC5jb20iLCJhdWQiOiJUZXN0LmNvbSJ9.6iHF7h5-_g2QFS3Rg7vLbxbYGDTey6Djm8IPGX8723s";
+    if (approvedQuestions.length === 0) {
+      setAssessmentMessage("Approve at least one question before creating an assessment.");
+      return;
+    }
+
+    const accessToken = readAuthToken();
     if (!accessToken) {
       setAssessmentMessage("Login token not found. Please sign in again before saving.");
       return;
@@ -275,7 +435,7 @@ export default function AgentController() {
           // assessmentId: 0,
           educationStageId: 1,
           gradeId: Number(state.grade),
-          questions: state.allQuestions.map((question) => {
+          questions: approvedQuestions.map((question) => {
             const correctAnswer = answerLetter(question.answer);
 
             return {
@@ -323,8 +483,8 @@ export default function AgentController() {
           gradeId: toNumericId(state.grade),
           subjectId: 0,
           questionType: 1,
-          totalQuestions: state.allQuestions.length,
-          totalMarks: state.allQuestions.reduce((total, question) => total + question.marks, 0),
+          totalQuestions: approvedQuestions.length,
+          totalMarks: approvedQuestions.reduce((total, question) => total + question.marks, 0),
           durationMinutes: gradeInfo.duration,
           difficultyLevel: 1,
           assessmentDate: new Date().toISOString(),
@@ -350,7 +510,7 @@ export default function AgentController() {
       const assessmentId = extractAssessmentId(createAssessmentPayload);
 
       setAssessmentMessage(
-        `Assessment ${assessmentId || "created"} saved with ${state.allQuestions.length} questions.`
+        `Assessment ${assessmentId || "created"} saved with ${approvedQuestions.length} questions.`
       );
     } catch (error) {
       const message = error instanceof Error ? error.message : "Assessment save failed";
@@ -554,6 +714,9 @@ export default function AgentController() {
         <section className="space-y-5">
           <div className="border-line grid gap-3 border-y bg-white/70 px-4 py-5 shadow-sm sm:grid-cols-2 sm:px-6 lg:grid-cols-4">
             <SummaryItem label="Total Questions" value={state.allQuestions.length.toString()} />
+            <SummaryItem label="Approved" value={approvedQuestions.length.toString()} />
+            <SummaryItem label="Rejected" value={rejectedQuestionCount.toString()} />
+            <SummaryItem label="Pending" value={pendingQuestionCount.toString()} />
             <SummaryItem
               label="Subjects Done"
               value={Object.keys(state.completed).length.toString()}
@@ -581,11 +744,15 @@ export default function AgentController() {
               <button
                 type="button"
                 onClick={createAssessment}
-                disabled={isCreatingAssessment || state.allQuestions.length === 0}
+                disabled={isCreatingAssessment || approvedQuestions.length === 0}
                 className="bg-ink rounded-md bg-zinc-800 px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition disabled:cursor-not-allowed disabled:opacity-60"
               >
                 {isCreatingAssessment ? "Saving Assessment" : "Create Assessment"}
               </button>
+              <p className="text-sm font-medium text-zinc-600">
+                {approvedQuestions.length} approved question
+                {approvedQuestions.length === 1 ? "" : "s"} will be saved.
+              </p>
               {assessmentMessage && (
                 <p className="text-sm font-medium text-zinc-600">{assessmentMessage}</p>
               )}
@@ -618,57 +785,90 @@ export default function AgentController() {
           )}
 
           <div className="space-y-4">
-            {state.allQuestions.map((question, index) => (
-              <article
-                key={`${question.subject}-${question.id}-${index}`}
-                className="border-line rounded-md border bg-white p-4 shadow-sm sm:p-5"
-              >
-                <div className="flex flex-wrap items-center gap-2">
-                  <span className="text-sm font-bold text-zinc-500">Q{index + 1}</span>
-                  <span className="rounded-full bg-zinc-100 px-2.5 py-1 text-xs font-bold text-zinc-700">
-                    {question.subject}
-                  </span>
-                  <span
-                    className={`rounded-full border px-2.5 py-1 text-xs font-bold ${difficultyClasses(question.difficulty)}`}
-                  >
-                    {question.difficulty}
-                  </span>
-                  {question.validation && (
-                    <span className="bg-ink rounded-full px-2.5 py-1 text-xs font-bold text-white">
-                      Score {question.validation.score}/10
+            {state.allQuestions.map((question, index) => {
+              const key = questionKey(question, index);
+              const approvalStatus = approvalByQuestionKey[key] ?? "pending";
+              const isReplacingQuestion = replacingQuestionKey === key;
+
+              return (
+                <article
+                  key={`${question.subject}-${question.id}-${index}`}
+                  className={`border-line rounded-md border bg-white p-4 shadow-sm sm:p-5 ${
+                    approvalStatus === "rejected" ? "opacity-70" : ""
+                  }`}
+                >
+                  <div className="flex flex-wrap items-center gap-2">
+                    <span className="text-sm font-bold text-zinc-500">Q{index + 1}</span>
+                    <span className="rounded-full bg-zinc-100 px-2.5 py-1 text-xs font-bold text-zinc-700">
+                      {question.subject}
                     </span>
-                  )}
-                </div>
-                <div className="mt-3 flex flex-wrap gap-2 text-xs font-semibold text-zinc-600">
-                  <span className="border-line bg-paper rounded-md border px-2 py-1">
-                    {question.competency}
-                  </span>
-                  <span className="border-line bg-paper rounded-md border px-2 py-1">
-                    {question.lo}
-                  </span>
-                </div>
-                <p className="text-ink mt-4 text-base font-semibold leading-7">
-                  {question.question}
-                </p>
-                <div className="mt-4 grid gap-2 md:grid-cols-2">
-                  {question.options.map((option) => {
-                    const isCorrect = option.trim().startsWith(`${answerLetter(question.answer)})`);
-                    return (
-                      <div
-                        key={option}
-                        className={`rounded-md border px-3 py-2 text-sm ${
-                          isCorrect
-                            ? "border-green-300 bg-green-50 text-green-800"
-                            : "border-line bg-paper text-zinc-700"
-                        }`}
-                      >
-                        {option}
-                      </div>
-                    );
-                  })}
-                </div>
-              </article>
-            ))}
+                    <span
+                      className={`rounded-full border px-2.5 py-1 text-xs font-bold ${difficultyClasses(question.difficulty)}`}
+                    >
+                      {question.difficulty}
+                    </span>
+                    {question.validation && (
+                      <span className="bg-ink rounded-full px-2.5 py-1 text-xs font-bold text-white">
+                        Score {question.validation.score}/10
+                      </span>
+                    )}
+                    <span
+                      className={`rounded-full border px-2.5 py-1 text-xs font-bold capitalize ${approvalClasses(approvalStatus)}`}
+                    >
+                      {approvalStatus}
+                    </span>
+                  </div>
+                  <div className="mt-4 flex flex-wrap gap-2">
+                    <button
+                      type="button"
+                      disabled={approvalStatus === "approved"}
+                      onClick={() => updateQuestionApproval(question, index, "approved")}
+                      className="rounded-md bg-green-700 px-3 py-2 text-sm font-semibold text-white transition disabled:cursor-not-allowed disabled:opacity-60"
+                    >
+                      Approve
+                    </button>
+                    <button
+                      type="button"
+                      disabled={isReplacingQuestion}
+                      onClick={() => void replaceRejectedQuestion(question, index)}
+                      className="rounded-md border border-red-200 bg-red-50 px-3 py-2 text-sm font-semibold text-red-700 transition disabled:cursor-not-allowed disabled:opacity-60"
+                    >
+                      {isReplacingQuestion ? "Replacing..." : "Reject & Replace"}
+                    </button>
+                  </div>
+                  <div className="mt-3 flex flex-wrap gap-2 text-xs font-semibold text-zinc-600">
+                    <span className="border-line bg-paper rounded-md border px-2 py-1">
+                      {question.competency}
+                    </span>
+                    <span className="border-line bg-paper rounded-md border px-2 py-1">
+                      {question.lo}
+                    </span>
+                  </div>
+                  <p className="text-ink mt-4 text-base font-semibold leading-7">
+                    {question.question}
+                  </p>
+                  <div className="mt-4 grid gap-2 md:grid-cols-2">
+                    {question.options.map((option) => {
+                      const isCorrect = option
+                        .trim()
+                        .startsWith(`${answerLetter(question.answer)})`);
+                      return (
+                        <div
+                          key={option}
+                          className={`rounded-md border px-3 py-2 text-sm ${
+                            isCorrect
+                              ? "border-green-300 bg-green-50 text-green-800"
+                              : "border-line bg-paper text-zinc-700"
+                          }`}
+                        >
+                          {option}
+                        </div>
+                      );
+                    })}
+                  </div>
+                </article>
+              );
+            })}
           </div>
         </section>
       )}

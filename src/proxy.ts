@@ -1,9 +1,9 @@
 import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
 import {
-  AUTH_COOKIE_NAME,
   AUTH_PERMISSIONS_COOKIE_NAME,
-  AUTH_ROLES_COOKIE_NAME
+  AUTH_ROLES_COOKIE_NAME,
+  AUTH_TOKEN_COOKIE_NAME
 } from "@/features/auth/constants/auth.constants";
 import {
   getRoutePolicy,
@@ -26,10 +26,9 @@ function parseSerializedRoles(value?: string) {
 
 export function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
-  const authCookieName = process.env.AUTH_COOKIE_NAME ?? AUTH_COOKIE_NAME;
   const isProtectedRoute = PROTECTED_ROUTE_PREFIXES.some((route) => pathname.startsWith(route));
   const isPublicRoute = PUBLIC_ROUTE_PREFIXES.some((route) => pathname.startsWith(route));
-  const hasSession = Boolean(request.cookies.get(authCookieName)?.value);
+  const hasSession = Boolean(request.cookies.get(AUTH_TOKEN_COOKIE_NAME)?.value);
 
   if (isProtectedRoute && !hasSession) {
     const loginUrl = new URL(ROUTES.login, request.url);

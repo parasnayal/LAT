@@ -109,8 +109,14 @@ export function TeachersPage() {
             <TeacherForm
               isSubmitting={createTeacher.isPending}
               onSubmit={async (values) => {
-                await createTeacher.mutateAsync(values);
-                setCreateOpen(false);
+                try {
+                  await createTeacher.mutateAsync(values);
+                  setCreateOpen(false);
+                  return true;
+                } catch {
+                  // The mutation toast shows the API error and the modal remains open.
+                  return false;
+                }
               }}
             />
           </section>

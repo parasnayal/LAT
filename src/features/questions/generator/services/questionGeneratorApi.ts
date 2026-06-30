@@ -44,6 +44,7 @@ function normalizeQuestions(data: unknown): GeneratedQuestion[] {
 
   return items.map((item, index) => ({
     id: String(item.id ?? crypto.randomUUID()),
+    approvalStatus: "pending",
     instruction: String(item.instruction ?? "Read the question and choose the correct answer."),
     stimulus: item.stimulus ? String(item.stimulus) : "",
     question: String(item.question ?? `Generated question ${index + 1}`),

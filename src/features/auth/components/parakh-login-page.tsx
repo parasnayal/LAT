@@ -20,13 +20,8 @@ import { z } from "zod";
 import { authService } from "../services/auth.service";
 import { useAuthStore } from "../store/auth.store";
 import { getDefaultRouteForRole } from "../utils/role-routing";
-import { ROLE_PERMISSION_MAP } from "@/shared/constants/rbac";
 import type { RoleCode } from "@/shared/types/rbac";
 import styles from "./parakh-login-page.module.scss";
-
-type LoginRole = "Admin" | "Teacher / Reviewer" | "Assessment Manager";
-
-const roleHints: LoginRole[] = ["Admin", "Teacher / Reviewer", "Assessment Manager"];
 
 const platformHighlights = [
   {
@@ -61,7 +56,6 @@ export function ParakhLoginPage() {
   const formStatusId = useId();
   const setSession = useAuthStore((state) => state.setSession);
   const [showPassword, setShowPassword] = useState(false);
-  const [selectedRole, setSelectedRole] = useState<LoginRole>("Admin");
   const [statusMessage, setStatusMessage] = useState<string | null>(null);
   const [submitError, setSubmitError] = useState<string | null>(null);
   const {
@@ -87,11 +81,13 @@ export function ParakhLoginPage() {
         password: values.password,
         rememberMe: values.rememberMe
       });
-      const roleCode = (loginResponse.roleCode ?? "super_admin") as RoleCode;
+
+      console.log(loginResponse, "loginResponse");
+      const roleCode = (loginResponse.roleCode ?? "admin") as RoleCode;
 
       setSession(loginResponse.user, loginResponse.accessToken);
 
-      const sessionResponse = await fetch("/api/auth/demo-login", {
+      const sessionResponse = await fetch("/api/auth/session", {
         method: "POST",
         headers: {
           "content-type": "application/json"
@@ -100,7 +96,8 @@ export function ParakhLoginPage() {
           rememberMe: values.rememberMe,
           roleCode,
           roleId: loginResponse.user.roleId,
-          token: loginResponse.accessToken
+          token: loginResponse.accessToken,
+          userDetail: loginResponse.latUser
         })
       });
 
@@ -109,8 +106,6 @@ export function ParakhLoginPage() {
         return;
       }
 
-      window.localStorage.setItem("accessToken", loginResponse.accessToken);
-      window.localStorage.setItem("permissions", ROLE_PERMISSION_MAP[roleCode].join(","));
       setStatusMessage("Sign in successful. Opening workspace...");
       const redirectTo = getDefaultRouteForRole(roleCode);
       router.push(redirectTo as Route);

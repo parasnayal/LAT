@@ -1,31 +1,11 @@
 import { clientEnv } from "@/shared/config/env";
+import { readAuthToken } from "@/features/auth/utils/auth-cookies";
 import type { ApiErrorBody } from "@/shared/types/api";
 import { ApiError } from "./api-error";
 
 type RequestOptions = Omit<RequestInit, "body"> & {
   body?: BodyInit | Record<string, unknown>;
 };
-
-function readCookie(name: string) {
-  if (typeof document === "undefined") {
-    return null;
-  }
-
-  return (
-    document.cookie
-      .split("; ")
-      .find((row) => row.startsWith(`${name}=`))
-      ?.split("=")[1] ?? null
-  );
-}
-
-function readAuthToken() {
-  if (typeof window === "undefined") {
-    return null;
-  }
-
-  return window.localStorage.getItem("accessToken") ?? readCookie("accessToken");
-}
 
 async function parseResponse<TData>(response: Response): Promise<TData> {
   const contentType = response.headers.get("content-type");
@@ -57,7 +37,7 @@ export async function fetchClient<TData>(path: string, options: RequestOptions =
   }
 
   if (token && !headers.has("authorization")) {
-    headers.set("authorization", `Bearer ${decodeURIComponent(token)}`);
+    headers.set("authorization", `Bearer ${token}`);
   }
 
   const response = await fetch(`${clientEnv.NEXT_PUBLIC_API_BASE_URL}${path}`, {

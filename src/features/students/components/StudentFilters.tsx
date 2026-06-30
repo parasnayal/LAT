@@ -29,7 +29,7 @@ export function StudentFilters({ filters, onChange }: StudentFiltersProps) {
           type="search"
           value={filters.search ?? ""}
           onChange={(event) => onChange({ ...filters, search: event.target.value || undefined })}
-          placeholder="Search by name or roll number"
+          placeholder="Search by name"
         />
       </label>
     </div>

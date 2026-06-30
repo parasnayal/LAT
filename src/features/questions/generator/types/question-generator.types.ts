@@ -4,6 +4,8 @@ export type QuestionType = "mcq";
 
 export type QuestionLanguage = "english" | "hindi";
 
+export type QuestionApprovalStatus = "pending" | "approved" | "rejected";
+
 export type SelectOption = {
   id: string;
   name: string;
@@ -29,6 +31,7 @@ export type GeneratedQuestionOption = {
 
 export type GeneratedQuestion = {
   id: string;
+  approvalStatus: QuestionApprovalStatus;
   instruction: string;
   stimulus?: string;
   question: string;

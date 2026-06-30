@@ -16,7 +16,6 @@ export type CreateTeacherPayload = {
   userName: string;
   fullName: string;
   email: string;
-  password: string;
   roleId: number;
   schoolId: number;
   contactNumber: string;

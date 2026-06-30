@@ -6,7 +6,6 @@ import {
 } from "@/shared/constants/rbac";
 import type {
   AuditEvent,
-  EntityStatus,
   Permission,
   PermissionAction,
   PermissionCode,
@@ -190,6 +189,7 @@ function createUser(
 
 function getRoleDescription(code: RoleCode) {
   const descriptions: Record<RoleCode, string> = {
+    admin: "Full platform administration mapped from the LAT Admin role.",
     super_admin:
       "Full platform administration across organizations, users, permissions, settings, and analytics.",
     organization_admin:

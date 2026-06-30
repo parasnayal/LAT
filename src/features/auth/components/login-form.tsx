@@ -12,6 +12,7 @@ import { getDefaultRouteForRole } from "../utils/role-routing";
 import { Button } from "@/shared/components/ui/button";
 import { Input } from "@/shared/components/ui/input";
 import { ApiError } from "@/shared/services/http/api-error";
+import type { RoleCode } from "@/shared/types/rbac";
 
 export function LoginForm() {
   const router = useRouter();
@@ -34,8 +35,29 @@ export function LoginForm() {
 
     try {
       const response = await authService.login(values);
+      const roleCode = (response.roleCode ?? "admin") as RoleCode;
       setSession(response.user, response.accessToken);
-      const redirectTo = getDefaultRouteForRole(response.roleCode);
+
+      const sessionResponse = await fetch("/api/auth/session", {
+        method: "POST",
+        headers: {
+          "content-type": "application/json"
+        },
+        body: JSON.stringify({
+          rememberMe: true,
+          roleCode,
+          roleId: response.user.roleId,
+          token: response.accessToken,
+          userDetail: response.latUser
+        })
+      });
+
+      if (!sessionResponse.ok) {
+        setFormError("Login succeeded, but session setup failed. Please try again.");
+        return;
+      }
+
+      const redirectTo = getDefaultRouteForRole(roleCode);
       router.push(redirectTo as Route);
     } catch (error) {
       setFormError(error instanceof ApiError ? error.message : "Unable to sign in");

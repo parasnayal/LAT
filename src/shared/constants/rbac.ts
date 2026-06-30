@@ -60,6 +60,7 @@ export const RBAC_PERMISSIONS = {
 export const ALL_PERMISSION_CODES = Object.values(RBAC_PERMISSIONS);
 
 export const ROLE_LABELS: Record<RoleCode, string> = {
+  admin: "Admin",
   super_admin: "Super Admin",
   organization_admin: "Organization Admin",
   curriculum_manager: "Curriculum Manager",
@@ -72,6 +73,7 @@ export const ROLE_LABELS: Record<RoleCode, string> = {
 };
 
 export const ROLE_PERMISSION_MAP: Record<RoleCode, PermissionCode[]> = {
+  admin: [...ALL_PERMISSION_CODES],
   super_admin: [...ALL_PERMISSION_CODES],
   organization_admin: [
     RBAC_PERMISSIONS.userView,

@@ -1,12 +1,5 @@
 import axios from "axios";
-
-function readToken() {
-  if (typeof window === "undefined") {
-    return null;
-  }
-
-  return window.localStorage.getItem("accessToken");
-}
+import { readAuthToken } from "@/features/auth/utils/auth-cookies";
 
 export const latApiClient = axios.create({
   baseURL: "/api/lat",
@@ -16,7 +9,7 @@ export const latApiClient = axios.create({
 });
 
 latApiClient.interceptors.request.use((config) => {
-  const token = readToken();
+  const token = readAuthToken();
 
   if (token) {
     config.headers.Authorization = `Bearer ${token}`;
